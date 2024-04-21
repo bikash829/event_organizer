@@ -7,36 +7,34 @@
                     
                     @csrf
                     @isset($blog)
-                        
                         @method('PUT')
-                        
                     @endisset
-                    <div class=" my-2 form-group">
+                    {{-- <x-forms.input 
+                    name="title"
+                    type="text" 
+                    label="Title"
+                    value="{{old('title',isset($blog)?$blog->title:'')}}"
+                    class="@error('title') is-invalid @enderror"
+                    id="title"
+                    :isRequired="false"
+                    errorKey="title"
 
-                        <label for="title">Title</label>
-
-                        <input 
-                        value="{{old('title',isset($blog)?$blog->title:'')}}" 
-                        type="text" 
-                        class="form-control @error('title') is-invalid @enderror" 
-                        id="title" 
-                        name="title" 
-                        placeholder="Enter title">
-
-                        @if($errors->has('title'))
-                            <div class="error invalid-feedback">{{ $errors->first('title') }}</div>
-                        @endif
-                    </div>
+                    ></x-forms.input> --}}
+                    <x-forms.input
+                    name="title"
+                    label="Title"
+                    value="{{old('title',isset($blog)?$blog->title:'')}}"
+                    :isRequired="true"
+                    ></x-forms.input>
+                    <x-forms.input
+                    name="content"
+                    label="Content"
+                    value="{{old('content',isset($blog)?$blog->content:'')}}"
+                    :isRequired="true"
+                    type="textarea"
+                    ></x-forms.input>
+                   
                     
-                    <div class=" my-2 form-group">
-                        <label for="content">Content</label>
-                    <textarea  
-                    class="form-control @error('content') is-invalid @enderror" 
-                    id="content" 
-                    name="content" 
-                    rows="3">{{old('content',isset($blog)?$blog->content:'')}}</textarea>@if($errors->has('content'))<div class="error invalid-feedback">{{ $errors->first('content') }}</div>
-                        @endif
-                    </div>
                     <button type="submit" class="my-2 btn btn-primary">Submit</button>
                 </form>
             </div>
