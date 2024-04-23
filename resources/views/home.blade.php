@@ -62,6 +62,7 @@
             </div>
 
         </section>
+        <button id="clickMe">Click Me</button>
         <!--./ About Us -->
     </div>
 @endsection
