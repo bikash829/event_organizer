@@ -39,10 +39,10 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $users = [
-            ['name' => 'Test User', 'email' => 'test@example.com', 'role' => 'customer'],
-            ['name' => 'Admin', 'email' => 'admin@example.com', 'password' => Hash::make('password'), 'role' => 'admin'],
-            ['name' => 'Vendor', 'email' => 'vendor@example.com', 'password' => Hash::make('password'), 'role' => 'vendor'],
-            ['name' => 'Rayhan', 'email' => 'rayhan@example.com', 'password' => Hash::make('password'), 'role' => 'customer'],
+            ['first_name' => 'Test User', 'email' => 'test@example.com', 'role' => 'customer'],
+            ['first_name' => 'Admin', 'email' => 'admin@example.com', 'password' => Hash::make('password'), 'role' => 'admin'],
+            ['first_name' => 'Vendor', 'email' => 'vendor@example.com', 'password' => Hash::make('password'), 'role' => 'vendor'],
+            ['first_name' => 'Rayhan', 'email' => 'rayhan@example.com', 'password' => Hash::make('password'), 'role' => 'customer'],
         ];
 
         foreach ($users as $user) {
