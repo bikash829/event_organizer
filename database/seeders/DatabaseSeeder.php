@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-<<<<<<< HEAD
-use App\Models\Blog;
-=======
->>>>>>> version2
+
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,28 +20,5 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-<<<<<<< HEAD
-
-
-        Blog::create([
-            'title' => 'Test Blog 1',
-            'content' => 'This is a test blog 1',
-            'published_at' => now(),
-            'user_id' => 1,
-        ]);
-        Blog::create([
-            'title' => 'Test Blog 2',
-            'content' => 'This is a test blog 2',
-            'published_at' => now(),
-            'user_id' => 1,
-        ]);
-        Blog::create([
-            'title' => 'Test Blog 3',
-            'content' => 'This is a test blog 3',
-            'published_at' => now(),
-            'user_id' => 1,
-        ]);
-=======
->>>>>>> version2
     }
 }
