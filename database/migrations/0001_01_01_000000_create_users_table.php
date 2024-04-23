@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->string('phone')->nullable();
             $table->string('password');
             $table->enum('identity_type', ['national_id', 'passport', 'driving_license'])->nullable();
