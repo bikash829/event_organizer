@@ -43,41 +43,32 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav m-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}"
+                                aria-current="page" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About Us</a>
+                            <a class="nav-link {{ Route::currentRouteName() == 'about' ? 'active' : '' }}"
+                                href="{{ route('about') }}">About Us</a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
+                            <a class="nav-link {{ Route::currentRouteName() == 'services.index' ? 'active' : '' }}"
+                                href="{{ route('services.index') }}">Services</a>{{-- format-ignore --}}
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Blog</a>
+                            <a class="nav-link {{ Route::currentRouteName() == 'blogs.index' ? 'active' : '' }}"
+                                href="{{ route('blogs.index') }}">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">FAQ</a>
+                            <a class="nav-link {{ Route::currentRouteName() == 'faq' ? 'active' : '' }}"
+                                href="{{ route('faq') }}">FAQ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link {{ Route::currentRouteName() == 'contact.index' ? 'active' : '' }}"
+                                href="{{ route('contact.index') }}">Contact</a>
 
                         </li>
-                        {{-- <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                              </ul>
-                            </li> --}}
-                        {{-- <li class="nav-item">
-                              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                            </li> --}}
-
 
                     </ul>
 

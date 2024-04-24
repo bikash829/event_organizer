@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ServiceCategory;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
-class ServiceCategoryController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,6 +13,7 @@ class ServiceCategoryController extends Controller
     public function index()
     {
         //
+        return view('contact');
     }
 
     /**
@@ -34,7 +35,7 @@ class ServiceCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ServiceCategory $serviceCategory)
+    public function show(Contact $contact)
     {
         //
     }
@@ -42,7 +43,7 @@ class ServiceCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ServiceCategory $serviceCategory)
+    public function edit(Contact $contact)
     {
         //
     }
@@ -50,7 +51,7 @@ class ServiceCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ServiceCategory $serviceCategory)
+    public function update(Request $request, Contact $contact)
     {
         //
     }
@@ -58,7 +59,7 @@ class ServiceCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ServiceCategory $serviceCategory)
+    public function destroy(Contact $contact)
     {
         //
     }

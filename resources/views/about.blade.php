@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'About Us')
 @section('header')
     <!-- Carousel -->
     <div class="">
