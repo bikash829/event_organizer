@@ -3,3 +3,8 @@ $(document).ready(function () {
         responsive: true,
     });
 });
+$(document).ready(function () {
+    $("#users").DataTable({
+        responsive: true,
+    });
+});

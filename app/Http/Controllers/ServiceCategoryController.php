@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
+use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
 
-class BlogController extends Controller
+class ServiceCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show(ServiceCategory $serviceCategory)
     {
         //
     }
@@ -42,7 +42,7 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Blog $blog)
+    public function edit(ServiceCategory $serviceCategory)
     {
         //
     }
@@ -50,7 +50,7 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, ServiceCategory $serviceCategory)
     {
         //
     }
@@ -58,7 +58,7 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Blog $blog)
+    public function destroy(ServiceCategory $serviceCategory)
     {
         //
     }
