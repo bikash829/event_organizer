@@ -57,9 +57,12 @@
         </div>
     @endsession
 
-    <div>
-        <h1>User role : {{ Auth::user()->getRoleNames() }}</h1>
-    </div>
+    @auth
+        <div>
+            <h1>User role : {{ Auth::user()->getRoleNames() }}</h1>
+        </div>
+    @endauth
+
     <div class="">
         <!-- About Us -->
         <section class="row">
