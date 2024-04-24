@@ -45,4 +45,4 @@ Route::resource('contact', ContactController::class);
 
 //admin routes 
 // make resource route for admin 
-Route::resource('/admin', AdminController::class);
+Route::resource('admin', AdminController::class);
