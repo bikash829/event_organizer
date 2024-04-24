@@ -94,13 +94,15 @@
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    {{-- <a class="nav-link" data-bs-toggle="modal" data-bs-target="#register"
+                                        href="#">{{ __('Register') }}</a> --}}
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->first_name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -129,9 +131,11 @@
             @yield('content')
         </main>
 
-        <footer>
-            @yield('footer')
-        </footer>
+        <!-- footer -->
+        <x-layouts.footer />
+        <!--./ footer -->
+
+        <x-modal.register />
     </div>
 </body>
 

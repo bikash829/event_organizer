@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         //creating role 
-        $roles = ['vendor', 'customer', 'admin'];
+        $roles = ['seller', 'user', 'admin'];
 
         foreach ($roles as $role) {
             Role::create([
@@ -41,10 +41,10 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $users = [
-            ['first_name' => 'Test User', 'email' => 'test@example.com', 'role' => 'customer'],
+            ['first_name' => 'Test User', 'email' => 'test@example.com', 'role' => 'user'],
             ['first_name' => 'Admin', 'email' => 'admin@example.com', 'password' => Hash::make('password'), 'role' => 'admin'],
-            ['first_name' => 'Vendor', 'email' => 'vendor@example.com', 'password' => Hash::make('password'), 'role' => 'vendor'],
-            ['first_name' => 'Rayhan', 'email' => 'rayhan@example.com', 'password' => Hash::make('password'), 'role' => 'customer'],
+            ['first_name' => 'Vendor', 'email' => 'vendor@example.com', 'password' => Hash::make('password'), 'role' => 'seller'],
+            ['first_name' => 'Rayhan', 'email' => 'rayhan@example.com', 'password' => Hash::make('password'), 'role' => 'user'],
         ];
 
         foreach ($users as $user) {

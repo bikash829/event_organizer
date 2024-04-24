@@ -51,6 +51,15 @@
 @endsection
 
 @section('content')
+    @session('success')
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endsession
+
+    <div>
+        <h1>User role : {{ Auth::user()->getRoleNames() }}</h1>
+    </div>
     <div class="">
         <!-- About Us -->
         <section class="row">
@@ -143,4 +152,8 @@
             </tfoot>
         </table>
     </section>
+
+
+    <!--./ Datatabel -->
+
 @endsection
