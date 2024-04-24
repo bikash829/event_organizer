@@ -131,9 +131,9 @@
             @yield('content')
         </main>
 
-        <footer>
-            @yield('footer')
-        </footer>
+        <!-- footer -->
+        <x-layouts.footer />
+        <!--./ footer -->
 
         <x-modal.register />
     </div>

@@ -152,4 +152,8 @@
             </tfoot>
         </table>
     </section>
+
+
+    <!--./ Datatabel -->
+
 @endsection
