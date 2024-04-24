@@ -51,6 +51,11 @@
 @endsection
 
 @section('content')
+    @session('success')
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endsession
     <div class="">
         <!-- About Us -->
         <section class="row">

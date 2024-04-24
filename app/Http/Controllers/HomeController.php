@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\UserService;
 
 
 class HomeController extends Controller
@@ -25,7 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $users = User::get();
 
         return view('home', ['users' => $users]);
