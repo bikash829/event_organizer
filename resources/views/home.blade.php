@@ -56,6 +56,10 @@
             {{ session('success') }}
         </div>
     @endsession
+
+    <div>
+        <h1>User role : {{ Auth::user()->getRoleNames() }}</h1>
+    </div>
     <div class="">
         <!-- About Us -->
         <section class="row">

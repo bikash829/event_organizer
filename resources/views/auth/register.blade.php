@@ -18,11 +18,11 @@
 
                                 <div class="col-md-6">
                                     <div class="btn-group" role="group" aria-label="Role">
-                                        <input type="radio" class="btn-check" name="role" id="user"
+                                        <input type="radio" class="btn-check" name="role" value="user" id="user"
                                             autocomplete="off" required>
                                         <label class="btn btn-outline-success" for="user">Buyer</label>
 
-                                        <input type="radio" class="btn-check" name="role" id="seller"
+                                        <input type="radio" class="btn-check" name="role" value="seller" id="seller"
                                             autocomplete="off">
                                         <label class="btn btn-outline-warning" for="seller">Seller</label>
                                     </div>
