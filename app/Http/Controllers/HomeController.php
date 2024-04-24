@@ -14,10 +14,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified'])->except('index');
+    }
 
     /**
      * Show the application dashboard.
@@ -26,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (auth()->check() && !auth()->user()->hasVerifiedEmail()) {
+            return redirect(route('verification.notice'));
+        }
         $users = User::get();
 
         return view('home', ['users' => $users]);

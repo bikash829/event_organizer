@@ -25,7 +25,13 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/';
+    protected function redirectTo()
+    {
+        // return route('home');
+        session()->flash('success', 'Your account has been registered successfully!');
+        return route('home');
+    }
 
     /**
      * Create a new controller instance.

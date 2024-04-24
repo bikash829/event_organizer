@@ -10,6 +10,30 @@
                     <div class="card-body">
                         <form action="#" method="POST">
                             @csrf
+
+                            <div class="row mb-3">
+                                <div class="col-md-4 text-md-end">
+                                    <label for="role" class="col-form-label">{{ __('Role') }}</label>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="btn-group" role="group" aria-label="Role">
+                                        <input type="radio" class="btn-check" name="role" id="user"
+                                            autocomplete="off" required>
+                                        <label class="btn btn-outline-success" for="user">Buyer</label>
+
+                                        <input type="radio" class="btn-check" name="role" id="seller"
+                                            autocomplete="off">
+                                        <label class="btn btn-outline-warning" for="seller">Seller</label>
+                                    </div>
+
+                                    @error('role')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="row mb-3">
                                 <label for="first_name"
                                     class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
