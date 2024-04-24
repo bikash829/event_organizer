@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Service\ServiceController;
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -38,3 +39,10 @@ Route::get('/faq', function () {
 
 // Route for contact
 Route::resource('contact', ContactController::class);
+
+
+
+
+//admin routes 
+// make resource route for admin 
+Route::resource('/admin', AdminController::class);
