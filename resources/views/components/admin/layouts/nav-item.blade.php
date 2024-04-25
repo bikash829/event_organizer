@@ -15,10 +15,16 @@
         <i class="nav-icon fas {{ $navLink['icon'] }}"></i>
         <p>
             {{ $navLink['name'] }}
-            {{-- @isset($navLink['children']) --}}
-            {{-- <i class="fas fa-angle-left right"></i> --}}
-            {{-- @endisset --}}
+            @isset($navLink['children'])
+                <i class="right fas fa-angle-left"></i>
+            @endisset
+
         </p>
+
+        {{-- badge  --}}
+        @isset($navLink['badge'])
+            <span class="right badge badge-danger">New</span>
+        @endisset
     </a>
 
     @isset($navLink['children'])

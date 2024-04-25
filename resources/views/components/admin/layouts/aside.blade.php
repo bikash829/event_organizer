@@ -7,25 +7,100 @@ $navLinks = [
     ],
     [
         'name' => 'Manage Users',
-        'icon' => 'fas fa-angle-left right',
+        'icon' => 'fa-solid fa-user-gear',
         'route' => 'admin/user',
         'children' => [
             [
-                'name' => 'Pending User',
-                'icon' => 'fa-tachometer-alt',
+                'name' => 'Pending Seller',
+                'icon' => 'fa-solid fa-user-clock',
                 'route' => route('admin.pendingSeller'),
             ],
             [
-                'name' => 'Dashboard',
-                'icon' => 'fa-tachometer-alt',
+                'name' => 'All Seller',
+                'icon' => 'fa-solid fa-user-tie',
+                'route' => '',
+            ],
+            [
+                'name' => 'All User',
+                'icon' => 'fa-solid fa-users',
+                'route' => '',
+            ],
+            [
+                'name' => 'Blocked User',
+                'icon' => 'fa-solid fa-users',
+                'route' => 'fa-solid fa-user-lock',
+            ],
+        ],
+    ],
+    'MANAGE SERVICES' => [
+        'name' => 'Manage Services',
+        'icon' => 'fa-solid fa-sliders',
+        'route' => '',
+        'children' => [
+            [
+                'name' => 'Service Categores',
+                'icon' => 'fa-solid fa-layer-group',
+                'route' => '',
+            ],
+            [
+                'name' => 'Add Category',
+                'icon' => 'fa-solid fa-file-circle-plus',
                 'route' => '',
             ],
         ],
     ],
-    'Test' => [
-        'name' => 'Dashboard',
-        'icon' => 'nav-icon fas fa-tachometer-alt',
-        'route' => route('admin.index'),
+    'Service Status' => [
+        'name' => 'Service Status',
+        'icon' => 'fa-solid fa-chart-line',
+        'route' => '',
+        'children' => [
+            [
+                'name' => 'Booked Services',
+                'icon' => 'fa-solid fa-calendar-check',
+                'route' => '',
+            ],
+            [
+                'name' => 'Pending Services',
+                'icon' => 'fa-solid fa-spinner',
+                'route' => '',
+            ],
+            [
+                'name' => 'Services Inprogress',
+                'icon' => 'fa-solid fa-hourglass-half',
+                'route' => '',
+            ],
+            [
+                'name' => 'Delivered Services',
+                'icon' => 'fa-solid fa-truck-ramp-box',
+                'route' => '',
+            ],
+            [
+                'name' => 'All Services',
+                'icon' => 'fa-solid fa-expand',
+                'route' => '',
+            ],
+        ],
+    ],
+    'Community' => [
+        'name' => 'Blog',
+        'icon' => 'fa-solid fa-blog',
+        'route' => '',
+    ],
+    'site info' => [
+        'name' => 'Contact Query',
+        'icon' => 'fa-solid fa-envelopes-bulk',
+        'route' => '',
+        'badge' => true,
+    ],
+    [
+        'name' => 'FAQ',
+        'icon' => 'fa-solid fa-clipboard-question',
+        'route' => '',
+    ],
+    [
+        'name' => 'About',
+        'icon' => 'fa-solid fa-circle-info',
+        'route' => '',
     ],
 ];
 
@@ -72,7 +147,7 @@ $navLinks = [
                 @foreach ($navLinks as $key => $navLink)
                     {{-- <x-admin.layouts.nav-item :navLink="$navLink" /> --}}
                     @if (gettype($key) == 'string')
-                        <p>{{ $key }}</p>
+                        <li class="nav-header">{{ strtoupper($key) }}</li>
                     @endif
                     <x-admin.layouts.nav-item :navLink="$navLink" />
                 @endforeach
