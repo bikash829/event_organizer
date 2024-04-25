@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -63,10 +64,25 @@ class AdminController extends Controller
         //
     }
 
-
+    // manage users ---------------------------->
     // Manage User 
-    public function pendingSeller()
+    public function pendingSeller(UserService $userService)
     {
-        return view('admin.manage_user.pending_seller');
+        $pendingSellers = $userService->getAllSellers();
+        return view('admin.manage_user.pending_seller', compact('pendingSellers'));
     }
+    // all seller 
+    public function allSeller(UserService $userService)
+    {
+        $sellers = $userService->getAllSellers();
+        return view('admin.manage_user.all_seller', compact('sellers'));
+    }
+
+
+
+
+    // Mange users <------------------------------|
+
+
+
 }

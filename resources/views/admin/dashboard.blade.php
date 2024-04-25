@@ -1,5 +1,12 @@
 @extends('admin.layouts.app')
+
+{{-- header  --}}
+
+
+{{-- content  --}}
+
 @section('content')
+    @php $title = 'Dashboard'; @endphp
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">

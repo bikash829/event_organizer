@@ -1,4 +1,5 @@
 @extends('admin.layouts.app')
+@section('title', 'Manage Users')
 @push('styles')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -6,21 +7,15 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <!-- DataTables -->
 @endpush
-@section('title', 'Manage Users')
-
 @section('content')
     <!-- Header props -->
-    @php $title = 'Pending Seller'; @endphp
+    @php $title = 'All Seller'; @endphp
     <!--./ Header props -->
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Title</h3>
-
-
         </div>
-        <!-- /.card-header -->
-        <!-- card body -->
         <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -34,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pendingSellers as $seller)
+                    @foreach ($sellers as $seller)
                         <tr>
                             <td>{{ $seller->id }}</td>
                             <td>{{ fullName($seller->first_name, $seller->last_name) }}</td>
@@ -59,12 +54,14 @@
             </table>
         </div>
         <!-- /.card-body -->
-
+        <div class="card-footer">
+            Footer
+        </div>
+        <!-- /.card-footer-->
     </div>
     <!-- /.card -->
 
 @endsection
-
 @push('scripts')
     <!-- jQuery -->
     <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>

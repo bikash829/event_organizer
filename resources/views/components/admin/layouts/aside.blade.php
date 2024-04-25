@@ -18,7 +18,7 @@ $navLinks = [
             [
                 'name' => 'All Seller',
                 'icon' => 'fa-solid fa-user-tie',
-                'route' => '',
+                'route' => route('admin.allSeller'),
             ],
             [
                 'name' => 'All User',
@@ -27,8 +27,8 @@ $navLinks = [
             ],
             [
                 'name' => 'Blocked User',
-                'icon' => 'fa-solid fa-users',
-                'route' => 'fa-solid fa-user-lock',
+                'icon' => 'fa-solid fa-user-lock',
+                'route' => '',
             ],
         ],
     ],
@@ -151,9 +151,6 @@ $navLinks = [
                     @endif
                     <x-admin.layouts.nav-item :navLink="$navLink" />
                 @endforeach
-
-
-
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -6,12 +6,25 @@ use App\Models\User;
 
 class UserService
 {
+    // all users
     public function getAllUsers()
     {
-        return User::all();
+        $nonEditors = User::withoutRole('admin')->get();
     }
 
+    // all seller 
+    public function getAllSellers()
+    {
+        return User::role('seller')->get();
+    }
 
+    // all customer
+    public function getAllCustomer()
+    {
+        return User::role('user')->get();
+    }
+
+    // a user
     public function getUser($user)
     {
         return User::find($user);

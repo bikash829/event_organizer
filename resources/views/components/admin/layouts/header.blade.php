@@ -9,7 +9,7 @@
                 <ol class="breadcrumb float-sm-right">
 
                     <li class="breadcrumb-item"><a href="{{ route($routeName) }}">Home</a></li>
-                    <li class="breadcrumb-item  {{ Route::CurrentRouteName() == $routeName ? 'active' : '' }}">
+                    <li class="breadcrumb-item  active">
                         {{ $title }}
                     </li>
                 </ol>
@@ -17,3 +17,4 @@
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
+@props(['title' => 'Default Title', 'routeName' => 'default.route'])

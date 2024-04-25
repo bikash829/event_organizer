@@ -33,6 +33,9 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/summernote/summernote-bs4.min.css') }} ">
 
+
+
+    @stack('styles')
     @vite(['resources/css/app.css', 'resources/js/admin/app.js'])
 
 </head>
@@ -60,7 +63,9 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <x-admin.layouts.header title="Dashborad" routeName="admin.index" />
+            @yield('header')
+            <x-admin.layouts.header :title="$title ?? 'Pending Users'" :routeName="$routeName ?? 'admin.index'" />
+
             <!-- /.content-header -->
 
             <!-- Main content -->
@@ -119,7 +124,7 @@
     <script src="{{ asset('assets/admin/dist/js/pages/dashboard.js') }} "></script>
     <script src="{{ asset('assets/admin/plugins/fontawesome/js/all.min.js') }} "></script>
 
-
+    @stack('scripts')
 </body>
 
 </html>
