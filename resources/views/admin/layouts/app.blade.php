@@ -48,9 +48,7 @@
                 alt="AdminLTELogo" height="60" width="60">
         </div>
 
-        @php
 
-        @endphp
 
         <!-- Navbar -->
         <x-admin.layouts.nav />

@@ -1,3 +1,36 @@
+<?php
+$navLinks = [
+    [
+        'name' => 'Dashboard',
+        'icon' => 'nav-icon fas fa-tachometer-alt',
+        'route' => route('admin.index'),
+    ],
+    [
+        'name' => 'Manage Users',
+        'icon' => 'fas fa-angle-left right',
+        'route' => 'admin/user',
+        'children' => [
+            [
+                'name' => 'Pending User',
+                'icon' => 'fa-tachometer-alt',
+                'route' => route('admin.pendingSeller'),
+            ],
+            [
+                'name' => 'Dashboard',
+                'icon' => 'fa-tachometer-alt',
+                'route' => '',
+            ],
+        ],
+    ],
+    'Test' => [
+        'name' => 'Dashboard',
+        'icon' => 'nav-icon fas fa-tachometer-alt',
+        'route' => route('admin.index'),
+    ],
+];
+
+?>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -36,158 +69,13 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                   with font-awesome or any other icon font library -->
-                <li class="nav-item">
-                    <a href="{{ route('admin.index') }}"
-                        class="nav-link {{ Route::CurrentRouteName() == 'admin.index' ? 'active' : '' }} ">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-
-                        </p>
-                    </a>
-
-                </li>
-
-                <li class="nav-item menu-open">
-                    {{-- <a href="#"
-                        class="nav-link {{ Route::CurrentRouteName() == 'admin.pendingSeller' ? 'menu-open' : '' }}"> --}}
-                    <a href="#" class="nav-link active">
-                        <span><i class="fa-solid fa-user-gear"></i></span>
-
-                        <p>
-                            Manage User
-                            <i class="fas fa-angle-left right"></i>
-                            {{-- <span class="badge badge-info right">6</span> --}}
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.pendingSeller') }}"
-                                class="nav-link active {{ Route::CurrentRouteName() == 'admin.pendingSeller' ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pending Seller</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>All Seller</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>All User</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/layout/boxed.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Blocked User</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-                <li class="nav-header">SERVICE STATUS</li>
-                <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        {{-- <i class="nav-icon far fa-calendar-alt"></i> --}}
-                        <p>
-                            Booked Services
-                            <span class="badge badge-info right">2</span>
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        {{-- <i class="nav-icon far fa-calendar-alt"></i> --}}
-                        <p>
-                            Pending Services
-
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        {{-- <i class="nav-icon far fa-calendar-alt"></i> --}}
-                        <p>
-                            Services Inprogress
-
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        {{-- <i class="nav-icon far fa-calendar-alt"></i> --}}
-                        <p>
-                            Delivered Services
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        {{-- <i class="nav-icon far fa-calendar-alt"></i> --}}
-                        <p>
-                            All Services
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-header">MANAGE SERVICES</li>
-                <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        {{-- <i class="nav-icon far fa-calendar-alt"></i> --}}
-                        <p>
-                            Service Category
-
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        {{-- <i class="nav-icon far fa-calendar-alt"></i> --}}
-                        <p>
-                            Add Category
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-header">COMMUNITY</li>
-                <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        {{-- <i class="nav-icon far fa-calendar-alt"></i> --}}
-                        <p>
-                            Blogs
-                        </p>
-                    </a>
-                </li>
-
-
-
-                <li class="nav-header">SITE INFO</li>
-                <li class="nav-item">
-                    <a href="pages/examples/contact-us.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Contact Query </p>
-                        <span class="right badge badge-danger">New</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/examples/contact-us.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>FAQ</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/examples/contact-us.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>About</p>
-                    </a>
-                </li>
+                @foreach ($navLinks as $key => $navLink)
+                    {{-- <x-admin.layouts.nav-item :navLink="$navLink" /> --}}
+                    @if (gettype($key) == 'string')
+                        <p>{{ $key }}</p>
+                    @endif
+                    <x-admin.layouts.nav-item :navLink="$navLink" />
+                @endforeach
 
 
 
