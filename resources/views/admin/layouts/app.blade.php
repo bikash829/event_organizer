@@ -48,6 +48,10 @@
                 alt="AdminLTELogo" height="60" width="60">
         </div>
 
+        @php
+
+        @endphp
+
         <!-- Navbar -->
         <x-admin.layouts.nav />
         <!-- /.navbar -->
@@ -58,7 +62,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <x-admin.layouts.header />
+            <x-admin.layouts.header title="Dashborad" routeName="admin.index" />
             <!-- /.content-header -->
 
             <!-- Main content -->
@@ -115,6 +119,7 @@
     <script src="{{ asset('assets/admin/dist/js/demo.js') }} "></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('assets/admin/dist/js/pages/dashboard.js') }} "></script>
+    <script src="{{ asset('assets/admin/plugins/fontawesome/js/all.min.js') }} "></script>
 
 
 </body>

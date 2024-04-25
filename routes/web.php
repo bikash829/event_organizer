@@ -45,4 +45,5 @@ Route::resource('contact', ContactController::class);
 
 //admin routes 
 // make resource route for admin 
+Route::get('/admin/pendingSeller', [AdminController::class, 'pendingSeller'])->name('admin.pendingSeller');
 Route::resource('admin', AdminController::class);

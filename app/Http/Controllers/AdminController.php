@@ -62,4 +62,11 @@ class AdminController extends Controller
     {
         //
     }
+
+
+    // Manage User 
+    public function pendingSeller()
+    {
+        return view('admin.manage_user.pending_seller');
+    }
 }

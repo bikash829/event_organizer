@@ -11,9 +11,13 @@ class header extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $title;
+    public $routeName;
+    public function __construct($title, $routeName)
     {
         //
+        $this->title = $title;
+        $this->routeName = $routeName;
     }
 
     /**
