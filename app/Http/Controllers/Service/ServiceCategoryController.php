@@ -10,6 +10,7 @@ use App\Services\ServiceCategoryService;
 
 class ServiceCategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -17,9 +18,9 @@ class ServiceCategoryController extends Controller
     protected $serviceCategory;
     public function __construct(ServiceCategoryService $serviceCategoryService)
     {
-
         $this->serviceCategory = $serviceCategoryService;
     }
+
     public function index()
     {
         //
@@ -34,7 +35,7 @@ class ServiceCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.manage_service.service_category.form');
     }
 
     /**
@@ -42,7 +43,19 @@ class ServiceCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'category_name' => 'required|max:255',
+            'description' => 'required',
+            // 'status' => 'required',
+        ]);
+
+        // dd($request);
+
+        $serviceCategory = $this->serviceCategory->storeCategory($request);
+
+        return "Service Category Created Successfully!";
+
     }
 
     /**
@@ -59,15 +72,18 @@ class ServiceCategoryController extends Controller
     public function edit(ServiceCategory $serviceCategory)
     {
         //
-        return view('admin.manage_service.service_category.edit', compact('serviceCategory'));
+        return view('admin.manage_service.service_category.form', compact('serviceCategory'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ServiceCategoryRequest $request, ServiceCategory $serviceCategory)
+
+
+    public function update(Request $request, ServiceCategory $serviceCategory)
     {
         //
+        dd('hello');
         $serviceCategory = $this->serviceCategory->updateCategory($request, $serviceCategory);
         // return to_route('blogs.index');
         return redirect('admin.manage_service.service_category.index');

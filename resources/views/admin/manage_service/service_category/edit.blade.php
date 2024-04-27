@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+{{-- @extends('admin.layouts.app')
 @push('styles')
     <x-admin.packages.data-table-css />
 @endpush
@@ -49,4 +49,4 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
         });
-    @endpush
+    @endpush --}}

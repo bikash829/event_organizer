@@ -30,5 +30,13 @@ class ServiceCategoryService
         return $category;
     }
 
+    public function storeCategory($request)
+    {
+        // $data = $request->validated();
+        // $data["user_id"] = 1;
+        // dd($request);
+        return ServiceCategory::create($request->all());
+    }
+
     // Add more methods as needed...
 }

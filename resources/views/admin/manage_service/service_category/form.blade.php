@@ -7,45 +7,34 @@
 @section('content')
     <!-- Header props -->
     @php
-        $title = 'Edit Service Category';
+        $title = 'Edit Category';
+
     @endphp
     <!--./ Header props -->
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Edit Category</h3>
+            <h3 class="card-title">Title</h3>
 
 
         </div>
         <!-- /.card-header -->
         <!-- card body -->
         <div class="card-body">
-            {{-- <form action="{{isset($blog)? route('blogs.update',$blog) : route('blogs.store') }}" method="POST"> --}}
             <form
-                action="{{ isset($category) ? route('service-category.update', $category) : route('service-category.store') }}"
+                action="@isset($serviceCategory){{ route('service-category.update', $serviceCategory) }}@else {{ route('service-category.store') }} @endisset "
                 method="POST">
-
                 @csrf
-                @isset($category)
+                @isset($serviceCategory)
                     @method('PUT')
                 @endisset
-                {{-- <x-forms.input 
-                name="title"
-                type="text" 
-                label="Title"
-                value="{{old('title',isset($blog)?$blog->title:'')}}"
-                class="@error('title') is-invalid @enderror"
-                id="title"
-                :isRequired="false"
-                errorKey="title"
 
-                ></x-forms.input> --}}
-                <x-forms.input name="category_name" label="Category Name"
-                    value="{{ old('category_name', isset($category) ? $category->category_name : '') }}"
-                    :isRequired="true"></x-forms.input>
-                <x-forms.input name="description" label="description"
-                    value="{{ old('description', isset($category) ? $category->description : '') }}" :isRequired="true"
-                    type="textarea"></x-forms.input>
+                <x-forms.input label="Category Name" name="category_name"
+                    value="{{ old('category_name', isset($serviceCategory) ? $serviceCategory->category_name : '') }}"
+                    :isRequired="true" />
+                <x-forms.input name="description" label="Description"
+                    value="{{ old('description', isset($serviceCategory) ? $serviceCategory->description : '') }}"
+                    :isRequired="true" type="textarea" />
 
 
                 <button type="submit" class="my-2 btn btn-primary">Submit</button>
@@ -70,4 +59,5 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
         });
-    @endpush
+    </script>
+@endpush

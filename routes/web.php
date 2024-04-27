@@ -50,27 +50,34 @@ Route::resource('contact', ContactController::class);
 
 //admin routes 
 //Manager users 
-Route::get('/admin/user/pending', [AdminController::class, 'pendingSeller'])->name('admin.pendingSeller');
-Route::get('/admin/user/all-seller', [AdminController::class, 'allSeller'])->name('admin.allSeller');
-Route::get('/admin/user/all-user', [AdminController::class, 'allUser'])->name('admin.allUser');
-Route::get('/admin/user/all-blocked-user', [AdminController::class, 'blockedUsers'])->name('admin.blockedUsers');
-Route::get('/admin/user/{user}', [AdminController::class, 'viewUser'])->name('admin.viewUser');
-Route::get('/admin/user/{user}/block', [AdminController::class, 'blockUser'])->name('admin.blockUser');
-Route::get('/admin/user/{user}/unblock', [AdminController::class, 'unblockUser'])->name('admin.unblockUser');
-Route::get('/admin/user/{user}/delete', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+// prefix 
+Route::prefix('admin')->group(function () {
+    Route::get('/user/pending', [AdminController::class, 'pendingSeller'])->name('admin.pendingSeller');
+    Route::get('/user/all-seller', [AdminController::class, 'allSeller'])->name('admin.allSeller');
+    Route::get('/user/all-user', [AdminController::class, 'allUser'])->name('admin.allUser');
+    Route::get('/user/all-blocked-user', [AdminController::class, 'blockedUsers'])->name('admin.blockedUsers');
+    Route::get('/user/{user}', [AdminController::class, 'viewUser'])->name('admin.viewUser');
+    Route::get('/user/{user}/block', [AdminController::class, 'blockUser'])->name('admin.blockUser');
+    Route::get('/user/{user}/unblock', [AdminController::class, 'unblockUser'])->name('admin.unblockUser');
+    Route::get('/user/{user}/delete', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+    Route::resource('admin', AdminController::class);
+    Route::resources([
+        '/service-category' => ServiceCategoryController::class,
+    ]);
+});
+
+
+
 // Route::resource('/admin/user', UserController::class)->name('admin');
 // Route::get('/admin/user/all-user', [AdminController::class, 'pendingSeller'])->name('admin.allUser');
 // Route::resource('admin', AdminController::class);
 
-Route::get('/admin/service-category', [ServiceCategoryController::class, 'index'])->name('admin.serviceCategory');
+// Route::get('/admin/service-category', [ServiceCategoryController::class, 'index'])->name('admin.serviceCategory');
 
-Route::resources([
-    'admin' => AdminController::class,
-    // prefix 
-    'admin/service-category' => ServiceCategoryController::class,
 
-]);
 // prefix 
+
+
 
 
 

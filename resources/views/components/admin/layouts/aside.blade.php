@@ -45,7 +45,7 @@ $navLinks = [
             [
                 'name' => 'Add Category',
                 'icon' => 'fa-solid fa-file-circle-plus',
-                'route' => '',
+                'route' => route('service-category.create'),
             ],
         ],
     ],
