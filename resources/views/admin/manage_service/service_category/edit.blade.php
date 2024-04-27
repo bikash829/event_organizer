@@ -24,19 +24,7 @@
             <form method="POST" action="{{ route('service-category.update', $serviceCategory) }}">
                 @csrf
                 @method('PUT')
-                <div class="form-group  @error('category_name') is-invalid @enderror">
-                    <label for="category_name">Category Name</label>
-                    <input type="text" class="form-control" id="category_name" name="category_name"
-                        value="{{ $serviceCategory->category_name }}">
-                    @error('category_name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                {{-- description  --}}
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" rows="3">{{ $serviceCategory->description }}</textarea>
-                </div>
+
                 <button type="submit" class="btn btn-primary">
                     Submit
                 </button>
