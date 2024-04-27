@@ -23,7 +23,7 @@ $navLinks = [
             [
                 'name' => 'All User',
                 'icon' => 'fa-solid fa-users',
-                'route' => '',
+                'route' => route('admin.allUser'),
             ],
             [
                 'name' => 'Blocked User',

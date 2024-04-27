@@ -24,19 +24,23 @@
                         <th>id</th>
                         <th>Name</th>
                         <th>email</th>
-                        <th>Platform(s)</th>
+                        <th>Role</th>
+                        <th>Is Active</th>
+                        <th>Is Verified</th>
                         {{-- <th>Engine version</th> --}}
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pendingSellers as $seller)
+                    @foreach ($users as $user)
                         <tr>
-                            <td>{{ $seller->id }}</td>
-                            <td>{{ fullName($seller->first_name, $seller->last_name) }}</td>
-                            <td>{{ $seller->email }}</td>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ fullName($user->first_name, $user->last_name) }}</td>
+                            <td>{{ $user->email }}</td>
 
-                            <td> {{ 'Music' }}</td>
+                            <td> {{ getRole($user->getRoleNames()) }}</td>
+                            <td> {{ $user->is_active }}</td>
+                            <td> {{ $user->is_verified }}</td>
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-primary">Action</button>
@@ -45,7 +49,8 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <div class="dropdown-menu" role="menu">
-                                        <a class="dropdown-item text-success" href="#"><i class="fa-solid fa-eye"></i>
+                                        <a class="dropdown-item text-success" href="{{ route('admin.viewUser', $user) }}"><i
+                                                class="fa-solid fa-eye"></i>
                                             View</a>
                                         <a class="dropdown-item text-primary" href="#"><i
                                                 class="fa-solid fa-pen-to-square"></i>Edit</a>
@@ -63,7 +68,9 @@
                         <th>id</th>
                         <th>Name</th>
                         <th>email</th>
-                        <th>Platform(s)</th>
+                        <th>Role</th>
+                        <th>Is Active</th>
+                        <th>Is Verified</th>
                         {{-- <th>Engine version</th> --}}
                         <th>Action</th>
                     </tr>

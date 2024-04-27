@@ -9,7 +9,8 @@ class UserService
     // all users
     public function getAllUsers()
     {
-        $nonEditors = User::withoutRole('admin')->get();
+        return User::withoutRole('admin')->get();
+
     }
 
     // all seller 

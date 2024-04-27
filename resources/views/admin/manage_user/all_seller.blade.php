@@ -1,11 +1,7 @@
 @extends('admin.layouts.app')
 @section('title', 'Manage Users')
 @push('styles')
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-    <!-- DataTables -->
+    <x-admin.packages.data-table-css />
 @endpush
 @section('content')
     <!-- Header props -->
@@ -23,7 +19,8 @@
                         <th>id</th>
                         <th>Name</th>
                         <th>email</th>
-                        <th>Platform(s)</th>
+                        <th>Role</th>
+                        <th>Is Active</th>
                         {{-- <th>Engine version</th> --}}
                         <th>Action</th>
                     </tr>
@@ -35,8 +32,23 @@
                             <td>{{ fullName($seller->first_name, $seller->last_name) }}</td>
                             <td>{{ $seller->email }}</td>
 
-                            <td> {{ 'Music' }}</td>
-                            <td><button class="btn btn-sm btn-primary">Action</button></td>
+                            <td> {{ getRole($seller->getRoleNames()) }}</td>
+                            <td> {{ $seller->is_active }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary">Action</button>
+                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-icon"
+                                        data-toggle="dropdown">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu" role="menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+
+                            </td>
                         </tr>
                     @endforeach
 
@@ -46,7 +58,8 @@
                         <th>id</th>
                         <th>Name</th>
                         <th>email</th>
-                        <th>Platform(s)</th>
+                        <th>Role</th>
+                        <th>Is Active</th>
                         {{-- <th>Engine version</th> --}}
                         <th>Action</th>
                     </tr>
@@ -63,29 +76,7 @@
 
 @endsection
 @push('scripts')
-    <!-- jQuery -->
-    <script src="{{ asset('assets/admin/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="{{ asset('assets/admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    {{-- <script src="{{ asset('assets/admin/dist/js/adminlte.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('assets/admin/dist/js/demo.js') }}"></script> --}}
-
-
+    <x-admin.packages.data-table-js />
     <script>
         $(function() {
             $("#example1").DataTable({

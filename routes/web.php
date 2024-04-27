@@ -10,6 +10,7 @@ use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\User\UserController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -48,5 +49,12 @@ Route::resource('contact', ContactController::class);
 // make resource route for admin 
 Route::get('/admin/user/pending', [AdminController::class, 'pendingSeller'])->name('admin.pendingSeller');
 Route::get('/admin/user/all-seller', [AdminController::class, 'allSeller'])->name('admin.allSeller');
-Route::get('/admin/user/all', [AdminController::class, 'pendingSeller'])->name('admin.allUser');
+Route::get('/admin/user/all-user', [AdminController::class, 'allUser'])->name('admin.allUser');
+Route::get('/admin/user/{user}', [AdminController::class, 'viewUser'])->name('admin.viewUser');
+// Route::resource('/admin/user', UserController::class)->name('admin');
+// Route::get('/admin/user/all-user', [AdminController::class, 'pendingSeller'])->name('admin.allUser');
 Route::resource('admin', AdminController::class);
+
+
+// User resource route
+Route::resource('user', UserController::class);

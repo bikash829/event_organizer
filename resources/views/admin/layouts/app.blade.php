@@ -35,6 +35,7 @@
 
 
 
+
     @stack('styles')
     @vite(['resources/css/app.css', 'resources/js/admin/app.js'])
 
@@ -123,6 +124,7 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('assets/admin/dist/js/pages/dashboard.js') }} "></script>
     <script src="{{ asset('assets/admin/plugins/fontawesome/js/all.min.js') }} "></script>
+
 
     @stack('scripts')
 </body>

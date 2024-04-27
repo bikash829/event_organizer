@@ -77,6 +77,20 @@ class AdminController extends Controller
         $sellers = $userService->getAllSellers();
         return view('admin.manage_user.all_seller', compact('sellers'));
     }
+    // all user 
+    public function allUser(UserService $userService)
+    {
+        $users = $userService->getAllUsers();
+        return view('admin.manage_user.all_user', compact('users'));
+    }
+
+
+    public function viewUser(UserService $userService, $user)
+    {
+        // dd($user);
+        $user = $userService->getUser($user);
+        return view('admin.manage_user.view_user', compact('user'));
+    }
 
 
 
