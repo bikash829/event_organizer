@@ -62,16 +62,26 @@
                                                 class="fa-solid fa-pen-to-square"></i>Edit</a>
 
                                         @if ($category->status == 'enabled')
-                                            <a class="dropdown-item text-secondary" data-block
-                                                href="{{-- route('admin.blockUser', $user) --}}"><i
+                                            <a class="dropdown-item text-secondary" data-disable
+                                                href="{{ route('disableCategory', $category) }} "><i
                                                     class="fa-solid fa-eye-slash"></i>Disable</a>
                                         @else
-                                            <a class="dropdown-item text-success" data-unblock
-                                                href="{{-- route('admin.unblockUser', $user) --}}"><i class="fa-solid fa-eye"></i> Enable</a>
+                                            <a class="dropdown-item text-success" data-enable
+                                                href="{{ route('enableCategory', $category) }}"><i
+                                                    class="fa-solid fa-eye"></i>
+                                                Enable</a>
                                         @endif
-                                        <a class="dropdown-item text-danger" href="{{-- route('admin.viewUser', $user) --}}"><i
-                                                class="fa-solid fa-eye"></i>
-                                            Delete</a>
+                                        <!--<a class="dropdown-item text-danger"
+                                                                                href="{{ route('service-category.destroy', $category) }}"><i
+                                                                                    class="fa-solid fa-eye"></i>
+                                                                                Delete</a> -->
+                                        <form method="POST" action="{{ route('service-category.destroy', $category) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button data-delete type="submit" class="dropdown-item text-danger">
+                                                <i class="fa-solid fa-eye"></i> Delete
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </td>
@@ -98,16 +108,88 @@
 
 @endsection
 
+
+
 @push('scripts')
     <x-admin.packages.data-table-js />
+    @if (session('success'))
+        <script>
+            let message = @json(session('success'));
+            $(document).ready(function() {
+
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+        </script>
+    @endif
+
     <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $(document).ready(function() {
+            // Disable category
+            $("[data-disable]").click(function() {
+                event.preventDefault();
+                const route = $(this).attr('href');
+                Swal.fire({
+                    title: "Are you sure?",
+
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        Swal.fire({
+                            title: "Disabled!",
+                            text: "The category has been disabled.",
+                            icon: "success"
+                        }).then(() => {
+                            // Redirect to the route
+                            window.location.href = route;
+                        });
+                    }
+                });
+            });
+
+
+            // Delete category
+            $("[data-delete]").click(function() {
+                event.preventDefault();
+                const route = $(this).closest('form').attr('action');
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        Swal.fire({
+                            title: "Enabled!",
+                            text: "The category has been deleted",
+                            icon: "success"
+                        }).then(() => {
+                            // Redirect to the route
+                            $(this).closest('form').submit();
+                        });
+                    }
+                });
+            });
+
+
+
 
         });
-    @endpush
+    </script>
+
+
+@endpush

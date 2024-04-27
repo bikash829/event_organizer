@@ -54,7 +54,7 @@ class ServiceCategoryController extends Controller
 
         $serviceCategory = $this->serviceCategory->storeCategory($request);
 
-        return "Service Category Created Successfully!";
+        return redirect()->route('service-category.index')->with('success', 'Service Category Created Successfully');
 
     }
 
@@ -82,18 +82,45 @@ class ServiceCategoryController extends Controller
 
     public function update(Request $request, ServiceCategory $serviceCategory)
     {
-        //
-        dd('hello');
-        $serviceCategory = $this->serviceCategory->updateCategory($request, $serviceCategory);
+        $request->validate([
+            'category_name' => 'required|max:255',
+            'description' => 'required',
+            // 'status' => 'required',
+        ]);
+        //$serviceCategory = $this->serviceCategory->updateCategory($request, $serviceCategory);
         // return to_route('blogs.index');
-        return redirect('admin.manage_service.service_category.index');
+        $serviceCategory->update($request->all());
+        return redirect()->route('service-category.index')->with('success', 'Service Category Updated Successfully');
     }
+
+    // disable category
+    public function disableCategory(ServiceCategory $category)
+    {
+        $category->update(['status' => 'disabled']);
+        return redirect()->route('service-category.index')->with('success', 'Service Category Disabled Successfully');
+    }
+
+    // enable category
+    public function enableCategory(ServiceCategory $category)
+    {
+        $category->update(['status' => 'enabled']);
+        return redirect()->route('service-category.index')->with('success', 'Service Category Enabled Successfully');
+    }
+
+    // update category
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(ServiceCategory $serviceCategory)
     {
-        //
+
+
+        //$serviceCategory = ServiceCategory::destroy($serviceCategory->id);
+        ServiceCategory::destroy($serviceCategory->id);
+
+
+        return redirect()->route('service-category.index')->with('success', 'Service Category Deleted Successfully');
+
     }
 }

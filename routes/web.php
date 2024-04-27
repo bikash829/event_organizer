@@ -61,6 +61,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/user/{user}/unblock', [AdminController::class, 'unblockUser'])->name('admin.unblockUser');
     Route::get('/user/{user}/delete', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
     Route::resource('admin', AdminController::class);
+
+
+    Route::get('/service-category/{category}/disable', [ServiceCategoryController::class, 'disableCategory'])->name('disableCategory');
+    Route::get('/service-category/{category}/enable', [ServiceCategoryController::class, 'enableCategory'])->name('enableCategory');
+
     Route::resources([
         '/service-category' => ServiceCategoryController::class,
     ]);
