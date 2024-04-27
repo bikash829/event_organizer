@@ -10,7 +10,7 @@ function isActiveRoute($route, $class = 'active')
 
 function isAnyRoute($route, $class = 'menu-open active')
 {
-    if (request()->is($route . "/*")) {
+    if (request()->is($route . "/*") || request()->is($route)) {
         return $class;
     }
 

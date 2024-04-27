@@ -28,19 +28,19 @@ $navLinks = [
             [
                 'name' => 'Blocked User',
                 'icon' => 'fa-solid fa-user-lock',
-                'route' => '',
+                'route' => route('admin.blockedUsers'),
             ],
         ],
     ],
     'MANAGE SERVICES' => [
         'name' => 'Manage Services',
         'icon' => 'fa-solid fa-sliders',
-        'route' => '',
+        'route' => 'admin/service-category',
         'children' => [
             [
                 'name' => 'Service Categores',
                 'icon' => 'fa-solid fa-layer-group',
-                'route' => '',
+                'route' => route('service-category.index'),
             ],
             [
                 'name' => 'Add Category',

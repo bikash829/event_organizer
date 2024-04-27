@@ -12,9 +12,12 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\User\UserController;
 
+use App\Http\Controllers\Service\ServiceCategoryController; // controller for service category
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
 
 Auth::routes(['verify' => true]);
 
@@ -46,14 +49,30 @@ Route::resource('contact', ContactController::class);
 
 
 //admin routes 
-// make resource route for admin 
+//Manager users 
 Route::get('/admin/user/pending', [AdminController::class, 'pendingSeller'])->name('admin.pendingSeller');
 Route::get('/admin/user/all-seller', [AdminController::class, 'allSeller'])->name('admin.allSeller');
 Route::get('/admin/user/all-user', [AdminController::class, 'allUser'])->name('admin.allUser');
+Route::get('/admin/user/all-blocked-user', [AdminController::class, 'blockedUsers'])->name('admin.blockedUsers');
 Route::get('/admin/user/{user}', [AdminController::class, 'viewUser'])->name('admin.viewUser');
+Route::get('/admin/user/{user}/block', [AdminController::class, 'blockUser'])->name('admin.blockUser');
+Route::get('/admin/user/{user}/unblock', [AdminController::class, 'unblockUser'])->name('admin.unblockUser');
+Route::get('/admin/user/{user}/delete', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
 // Route::resource('/admin/user', UserController::class)->name('admin');
 // Route::get('/admin/user/all-user', [AdminController::class, 'pendingSeller'])->name('admin.allUser');
-Route::resource('admin', AdminController::class);
+// Route::resource('admin', AdminController::class);
+
+Route::get('/admin/service-category', [ServiceCategoryController::class, 'index'])->name('admin.serviceCategory');
+
+Route::resources([
+    'admin' => AdminController::class,
+    // prefix 
+    'admin/service-category' => ServiceCategoryController::class,
+
+]);
+// prefix 
+
+
 
 
 // User resource route

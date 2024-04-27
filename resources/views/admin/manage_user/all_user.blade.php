@@ -6,7 +6,18 @@
 
 @section('content')
     <!-- Header props -->
-    @php $title = 'Pending Seller'; @endphp
+    @php
+        if (request()->routeIs('admin.allUser')) {
+            $title = 'All User';
+        } elseif (request()->routeIs('admin.blockedUsers')) {
+            $title = 'Blocked Users';
+        } elseif (request()->routeIs('admin.pendingSeller')) {
+            $title = 'Pending Sellers';
+        } elseif (request()->routeIs('admin.allSeller')) {
+            $title = 'All Sellers';
+        }
+
+    @endphp
     <!--./ Header props -->
     <!-- Default box -->
     <div class="card">
@@ -54,8 +65,18 @@
                                             View</a>
                                         <a class="dropdown-item text-primary" href="#"><i
                                                 class="fa-solid fa-pen-to-square"></i>Edit</a>
-                                        <a class="dropdown-item text-danger" href="#"><i
-                                                class="fa-solid fa-trash"></i>Delete</a>
+
+                                        @if ($user->is_active == 'active')
+                                            <a class="dropdown-item text-secondary" data-block
+                                                href="{{ route('admin.blockUser', $user) }}"><i
+                                                    class="fa-solid fa-lock"></i>Block</a>
+                                        @else
+                                            <a class="dropdown-item text-success" data-unblock
+                                                href="{{ route('admin.unblockUser', $user) }}"><i
+                                                    class="fa-solid fa-lock"></i>Unblock</a>
+                                        @endif
+
+
                                     </div>
                                 </div>
                             </td>
@@ -94,6 +115,69 @@
                 "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        });
+
+        $(document).ready(function() {
+            $("[data-block]").click(function() {
+                event.preventDefault();
+                const route = $(this).attr('href');
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        Swal.fire({
+                            title: "Blocked!",
+                            text: "The user has been blocked.",
+                            icon: "success"
+                        }).then(() => {
+                            // Redirect to the route
+                            window.location.href = route;
+                        });
+                    }
+                });
+            });
+
+
+
+
+        });
+        $(document).ready(function() {
+            $("[data-unblock]").click(function() {
+                event.preventDefault();
+                const route = $(this).attr('href');
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        Swal.fire({
+                            title: "Unblocked!",
+                            text: "The user is active now.",
+                            icon: "success"
+                        }).then(() => {
+                            // Redirect to the route
+                            window.location.href = route;
+                        });
+                    }
+                });
+            });
+
+
+
 
         });
     </script>

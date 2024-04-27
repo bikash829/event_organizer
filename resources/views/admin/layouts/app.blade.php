@@ -33,6 +33,8 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/summernote/summernote-bs4.min.css') }} ">
 
+    {{-- sweetalert --}}
+    <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert/sweetalert2.min.css') }}">
 
 
 
@@ -125,6 +127,7 @@
     <script src="{{ asset('assets/admin/dist/js/pages/dashboard.js') }} "></script>
     <script src="{{ asset('assets/admin/plugins/fontawesome/js/all.min.js') }} "></script>
 
+    <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
 
     @stack('scripts')
 </body>

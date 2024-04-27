@@ -2,11 +2,22 @@
 @push('styles')
     <x-admin.packages.data-table-css />
 @endpush
-@section('title', 'Manage Users')
+@section('title', 'Manage Services')
 
 @section('content')
     <!-- Header props -->
-    @php $title = 'Pending Seller'; @endphp
+    {{-- @php
+        if (request()->routeIs('admin.allUser')) {
+            $title = 'All User';
+        } elseif (request()->routeIs('admin.blockedUsers')) {
+            $title = 'Blocked Users';
+        } elseif (request()->routeIs('admin.pendingSeller')) {
+            $title = 'Pending Sellers';
+        } elseif (request()->routeIs('admin.allSeller')) {
+            $title = 'All Sellers';
+        }
+
+    @endphp --}}
     <!--./ Header props -->
     <!-- Default box -->
     <div class="card">
@@ -22,21 +33,20 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>Name</th>
-                        <th>email</th>
-                        <th>Platform(s)</th>
+                        <th>Category Name</th>
+                        <th>Status</th>
+                        <th>Description</th>
                         {{-- <th>Engine version</th> --}}
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pendingSellers as $seller)
+                    @foreach ($serviceCategories as $category)
                         <tr>
-                            <td>{{ $seller->id }}</td>
-                            <td>{{ fullName($seller->first_name, $seller->last_name) }}</td>
-                            <td>{{ $seller->email }}</td>
-
-                            <td> {{ 'Music' }}</td>
+                            <td>{{ $category->id }}</td>
+                            <td>{{ $category->category_name }}</td>
+                            <td>{{ $category->status }}</td>
+                            <td>{{ $category->description }}</td>
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-primary">Action</button>
@@ -44,27 +54,38 @@
                                         data-toggle="dropdown">
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
+
                                     <div class="dropdown-menu" role="menu">
-                                        <a class="dropdown-item text-success" href="#"><i class="fa-solid fa-eye"></i>
-                                            View</a>
-                                        <a class="dropdown-item text-primary" href="#"><i
+
+                                        <a class="dropdown-item text-primary"
+                                            href="{{ route('service-category.edit', $category) }}"><i
                                                 class="fa-solid fa-pen-to-square"></i>Edit</a>
-                                        <a class="dropdown-item text-danger" href="#"><i
-                                                class="fa-solid fa-trash"></i>Delete</a>
+
+                                        @if ($category->status == 'enabled')
+                                            <a class="dropdown-item text-secondary" data-block
+                                                href="{{-- route('admin.blockUser', $user) --}}"><i
+                                                    class="fa-solid fa-eye-slash"></i>Disable</a>
+                                        @else
+                                            <a class="dropdown-item text-success" data-unblock
+                                                href="{{-- route('admin.unblockUser', $user) --}}"><i class="fa-solid fa-eye"></i> Enable</a>
+                                        @endif
+                                        <a class="dropdown-item text-danger" href="{{-- route('admin.viewUser', $user) --}}"><i
+                                                class="fa-solid fa-eye"></i>
+                                            Delete</a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                     @endforeach
 
+
                 </tbody>
                 <tfoot>
                     <tr>
                         <th>id</th>
-                        <th>Name</th>
-                        <th>email</th>
-                        <th>Platform(s)</th>
-                        {{-- <th>Engine version</th> --}}
+                        <th>Category Name</th>
+                        <th>Status</th>
+                        <th>Description</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
@@ -89,5 +110,4 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
         });
-    </script>
-@endpush
+    @endpush

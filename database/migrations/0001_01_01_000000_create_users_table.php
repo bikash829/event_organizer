@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('city')->nullable();
             $table->string('address')->nullable();
             $table->string('zip_code')->nullable();
-            $table->boolean('is_verified')->default(false);
+            $table->enum('is_verified', ['verified', 'unverified', 'pending', 'rejected'])->default('unverified');
             $table->enum('is_active', ['active', 'inactive', 'blocked'])->default('active');
             $table->rememberToken();
             $table->timestamps();

@@ -68,19 +68,26 @@ class AdminController extends Controller
     // Manage User 
     public function pendingSeller(UserService $userService)
     {
-        $pendingSellers = $userService->getAllSellers();
-        return view('admin.manage_user.pending_seller', compact('pendingSellers'));
+        $users = $userService->getPendingSeller();
+        return view('admin.manage_user.all_user', compact('users'));
     }
     // all seller 
     public function allSeller(UserService $userService)
     {
-        $sellers = $userService->getAllSellers();
-        return view('admin.manage_user.all_seller', compact('sellers'));
+        $users = $userService->getAllSellers();
+        return view('admin.manage_user.all_user', compact('users'));
     }
     // all user 
     public function allUser(UserService $userService)
     {
         $users = $userService->getAllUsers();
+        return view('admin.manage_user.all_user', compact('users'));
+    }
+
+    // all blocked users
+    public function blockedUsers(UserService $userService)
+    {
+        $users = $userService->getAllBlockedUsers();
         return view('admin.manage_user.all_user', compact('users'));
     }
 
@@ -92,6 +99,26 @@ class AdminController extends Controller
         return view('admin.manage_user.view_user', compact('user'));
     }
 
+    // block user 
+    public function blockUser(UserService $userService, $user)
+    {
+        $userService->blockUser($user);
+        return back();
+    }
+
+    // unblock user
+    public function unblockUser(UserService $userService, $user)
+    {
+        $userService->unblockUser($user);
+        return back();
+    }
+    // delete user 
+    public function deleteUser(UserService $userService, $user)
+    {
+
+        $userService->destroyUser($user);
+        return back();
+    }
 
 
 

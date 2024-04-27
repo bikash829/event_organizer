@@ -62,8 +62,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @param  bool  $value
      * @return string
      */
-    public function getIsVerifiedAttribute($value)
-    {
-        return $value ? 'yes' : 'no';
-    }
+    // public function getIsVerifiedAttribute($value)
+    // {
+    //     return $value ? 'yes' : 'no';
+    // }
 }
