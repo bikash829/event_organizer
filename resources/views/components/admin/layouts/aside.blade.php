@@ -47,6 +47,16 @@ $navLinks = [
                 'icon' => 'fa-solid fa-file-circle-plus',
                 'route' => route('service-category.create'),
             ],
+            [
+                'name' => 'Create Service',
+                'icon' => 'fa-solid fa-file-circle-plus',
+                'route' => '',
+            ],
+            [
+                'name' => 'My Services',
+                'icon' => 'fa-solid fa-file-circle-plus',
+                'route' => 'fa-solid fa-layer-group',
+            ],
         ],
     ],
     'Service Status' => [
