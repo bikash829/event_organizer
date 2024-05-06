@@ -58,4 +58,14 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    /**
+     * Get the user's is_verified attribute.
+     *
+     * @param  bool  $value
+     * @return string
+     */
+    // public function getIsVerifiedAttribute($value)
+    // {
+    //     return $value ? 'yes' : 'no';
+    // }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 
 use App\Models\User;
+use App\Models\ServiceCategory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -53,6 +54,24 @@ class DatabaseSeeder extends Seeder
 
             $user = User::factory()->create($user);
             $user->assignRole($role);
+        }
+
+        // $table->string('category_name', 100);
+        //     $table->text('description');
+        //     $table->timestamps();
+        //make seeder for these service categories
+        $serviceCategories = [
+            ['category_name' => 'Music', 'description' => 'Cleaning service'],
+            ['category_name' => 'Decoration', 'description' => 'Plumbing service'],
+            ['category_name' => 'Electrical', 'description' => 'Electrical service'],
+            ['category_name' => 'Stage', 'description' => 'Carpentry service'],
+            ['category_name' => 'Food', 'description' => 'Painting service'],
+            ['category_name' => 'Band', 'description' => 'Gardening service'],
+            ['category_name' => 'Chef', 'description' => 'Pest Control service'],
+        ];
+
+        foreach ($serviceCategories as $serviceCategory) {
+            ServiceCategory::create($serviceCategory);
         }
 
     }

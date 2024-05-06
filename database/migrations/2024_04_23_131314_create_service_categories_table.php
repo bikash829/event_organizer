@@ -13,7 +13,9 @@ return new class extends Migration {
         Schema::create('service_categories', function (Blueprint $table) {
             $table->id();
             $table->string('category_name', 100);
+            $table->enum('status', ['enabled', 'disabled'])->default('enabled');
             $table->text('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
