@@ -1,3 +1,15 @@
-<div>
-    <!-- I have not failed. I've just found 10,000 ways that won't work. - Thomas Edison -->
-</div>
+@extends('layouts.app')
+@section('title', 'Services')
+
+
+@section('header')
+    <!-- Carousel -->
+    <div class="">
+        That's the header of services page.
+    </div>
+    <!--./ Carousel -->
+@endsection
+
+@section('content')
+    <h1>Here you are inside services page.</h1>
+@endsection
