@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\forms;
+namespace App\View\Components\Forms;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class input extends Component
+class Input extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,7 @@ class input extends Component
         public bool $isRequired = false, //boolean
         public string|null $errorKey = null,
     ) {
+
         //
     }
 
