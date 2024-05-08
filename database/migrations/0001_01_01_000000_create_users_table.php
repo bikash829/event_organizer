@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->string('zip_code')->nullable();
             $table->enum('is_verified', ['verified', 'unverified', 'pending', 'rejected'])->default('unverified');
             $table->enum('is_active', ['active', 'inactive', 'blocked'])->default('active');
+            
             $table->rememberToken();
             $table->timestamps();
         });

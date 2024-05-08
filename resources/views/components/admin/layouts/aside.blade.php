@@ -11,14 +11,14 @@ $navLinks = [
         'route' => 'admin/user',
         'children' => [
             [
-                'name' => 'Pending Seller',
+                'name' => 'Pending Vendor',
                 'icon' => 'fa-solid fa-user-clock',
-                'route' => route('admin.pendingSeller'),
+                'route' => route('admin.pendingVendor'),
             ],
             [
-                'name' => 'All Seller',
+                'name' => 'All Vendor',
                 'icon' => 'fa-solid fa-user-tie',
-                'route' => route('admin.allSeller'),
+                'route' => route('admin.allVendor'),
             ],
             [
                 'name' => 'All User',
@@ -40,22 +40,22 @@ $navLinks = [
             [
                 'name' => 'Service Categores',
                 'icon' => 'fa-solid fa-layer-group',
-                'route' => route('service-category.index'),
+                'route' => route('admin.service-category.index'),
             ],
             [
                 'name' => 'Add Category',
                 'icon' => 'fa-solid fa-file-circle-plus',
-                'route' => route('service-category.create'),
+                'route' => route('admin.service-category.create'),
+            ],
+            [
+                'name' => 'All Services',
+                'icon' => 'fa-solid fa-list',
+                'route' => '',
             ],
             [
                 'name' => 'Create Service',
                 'icon' => 'fa-solid fa-file-circle-plus',
                 'route' => '',
-            ],
-            [
-                'name' => 'My Services',
-                'icon' => 'fa-solid fa-file-circle-plus',
-                'route' => 'fa-solid fa-layer-group',
             ],
         ],
     ],
@@ -118,7 +118,7 @@ $navLinks = [
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{ route('admin.index') }}" class="brand-link">
         <img src="{{ asset('assets/admin/dist/img/AdminLTELogo.png') }} " alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Admin Dashborad</span>

@@ -13,27 +13,34 @@ class UserService
 
     }
 
-    // all seller 
-    public function getAllSellers()
+    // all Vendor========================================> 
+    public function getAllVendors()
     {
-        return User::role('seller')->get();
+        return User::role('vendor')->get();
     }
 
+    // pending Vendor 
+    public function getPendingVendor()
+    {
+        return User::role('vendor')->where('is_verified', 'pending')->get();
+    }
+    // rejected Vendor
+    public function getRejectedVendor()
+    {
+        return User::role('vendor')->where('is_verified', 'rejected')->get();
+    }
+    // Vendor <========================================
+
+
+    // create user 
+    public function createUser($data)
+    {
+        return User::create($data);
+    }
     // all customer
     public function getAllCustomer()
     {
         return User::role('user')->get();
-    }
-
-    // pending seller 
-    public function getPendingSeller()
-    {
-        return User::role('seller')->where('is_verified', 'pending')->get();
-    }
-    // rejected seller
-    public function getRejectedSeller()
-    {
-        return User::role('seller')->where('is_verified', 'rejected')->get();
     }
 
     // a user
@@ -42,17 +49,12 @@ class UserService
         return User::find($user);
     }
 
-    // create user 
-    public function createUser($data)
-    {
-        return User::create($data);
-    }
-
     // update user
     public function updateUser($data, $user)
     {
         return User::where('id', $user)->update($data);
     }
+
     // block user 
     public function blockUser($user)
     {
@@ -63,6 +65,7 @@ class UserService
     public function unblockUser($user)
     {
         return User::where('id', $user)->update(['is_active' => 'active']);
+
     }
 
     // all blocked user 

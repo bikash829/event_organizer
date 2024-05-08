@@ -64,17 +64,17 @@ class AdminController extends Controller
         //
     }
 
-    // manage users ---------------------------->
+    // manage users ------------------------------------------------>
     // Manage User 
-    public function pendingSeller(UserService $userService)
+    public function pendingVendor(UserService $userService)
     {
-        $users = $userService->getPendingSeller();
+        $users = $userService->getPendingVendor();
         return view('admin.manage_user.all_user', compact('users'));
     }
-    // all seller 
-    public function allSeller(UserService $userService)
+    // all Vendor 
+    public function allVendor(UserService $userService)
     {
-        $users = $userService->getAllSellers();
+        $users = $userService->getAllVendors();
         return view('admin.manage_user.all_user', compact('users'));
     }
     // all user 
@@ -122,7 +122,7 @@ class AdminController extends Controller
 
 
 
-    // Mange users <------------------------------|
+    // Mange users <-----------------------------------------------------|
 
 
 

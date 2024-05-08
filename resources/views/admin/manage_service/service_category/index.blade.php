@@ -45,7 +45,13 @@
                         <tr>
                             <td>{{ $category->id }}</td>
                             <td>{{ $category->category_name }}</td>
-                            <td>{{ $category->status }}</td>
+                            <td>
+                                @if ($category->status == 'enabled')
+                                    <span class=" text-success">{{ $category->status }}</span>
+                                @else
+                                    <span class=" text-danger">{{ $category->status }}</span>
+                                @endif
+                            </td>
                             <td>{{ $category->description }}</td>
                             <td>
                                 <div class="btn-group">
@@ -58,24 +64,25 @@
                                     <div class="dropdown-menu" role="menu">
 
                                         <a class="dropdown-item text-primary"
-                                            href="{{ route('service-category.edit', $category) }}"><i
+                                            href="{{ route('admin.service-category.edit', $category) }}"><i
                                                 class="fa-solid fa-pen-to-square"></i>Edit</a>
 
                                         @if ($category->status == 'enabled')
                                             <a class="dropdown-item text-secondary" data-disable
-                                                href="{{ route('disableCategory', $category) }} "><i
+                                                href="{{ route('admin.disableCategory', $category) }} "><i
                                                     class="fa-solid fa-eye-slash"></i>Disable</a>
                                         @else
                                             <a class="dropdown-item text-success" data-enable
-                                                href="{{ route('enableCategory', $category) }}"><i
+                                                href="{{ route('admin.enableCategory', $category) }}"><i
                                                     class="fa-solid fa-eye"></i>
                                                 Enable</a>
                                         @endif
                                         <!--<a class="dropdown-item text-danger"
-                                                                                href="{{ route('service-category.destroy', $category) }}"><i
-                                                                                    class="fa-solid fa-eye"></i>
-                                                                                Delete</a> -->
-                                        <form method="POST" action="{{ route('service-category.destroy', $category) }}">
+                                                                                                    href="{{ route('admin.service-category.destroy', $category) }}"><i
+                                                                                                        class="fa-solid fa-eye"></i>
+                                                                                                    Delete</a> -->
+                                        <form method="POST"
+                                            action="{{ route('admin.service-category.destroy', $category) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button data-delete type="submit" class="dropdown-item text-danger">

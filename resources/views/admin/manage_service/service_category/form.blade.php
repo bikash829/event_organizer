@@ -22,7 +22,7 @@
         <!-- card body -->
         <div class="card-body">
             <form
-                action="@isset($serviceCategory){{ route('service-category.update', $serviceCategory) }}@else {{ route('service-category.store') }} @endisset "
+                action="@isset($serviceCategory){{ route('admin.service-category.update', $serviceCategory) }}@else {{ route('admin.service-category.store') }} @endisset "
                 method="POST">
                 @csrf
                 @isset($serviceCategory)

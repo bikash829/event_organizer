@@ -51,23 +51,23 @@ Route::resource('contact', ContactController::class);
 //admin routes 
 //Manager users 
 // prefix 
-Route::prefix('admin')->group(function () {
-    Route::get('/user/pending', [AdminController::class, 'pendingSeller'])->name('admin.pendingSeller');
-    Route::get('/user/all-seller', [AdminController::class, 'allSeller'])->name('admin.allSeller');
-    Route::get('/user/all-user', [AdminController::class, 'allUser'])->name('admin.allUser');
-    Route::get('/user/all-blocked-user', [AdminController::class, 'blockedUsers'])->name('admin.blockedUsers');
-    Route::get('/user/{user}', [AdminController::class, 'viewUser'])->name('admin.viewUser');
-    Route::get('/user/{user}/block', [AdminController::class, 'blockUser'])->name('admin.blockUser');
-    Route::get('/user/{user}/unblock', [AdminController::class, 'unblockUser'])->name('admin.unblockUser');
-    Route::get('/user/{user}/delete', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
-    Route::resource('admin', AdminController::class);
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/user/pending', [AdminController::class, 'pendingVendor'])->name('pendingVendor');
+    Route::get('/user/all-Vendor', [AdminController::class, 'allVendor'])->name('allVendor');
+    Route::get('/user/all-user', [AdminController::class, 'allUser'])->name('allUser');
+    Route::get('/user/all-blocked-user', [AdminController::class, 'blockedUsers'])->name('blockedUsers');
+    Route::get('/user/{user}', [AdminController::class, 'viewUser'])->name('viewUser');
+    Route::get('/user/{user}/block', [AdminController::class, 'blockUser'])->name('blockUser');
+    Route::get('/user/{user}/unblock', [AdminController::class, 'unblockUser'])->name('unblockUser');
+    Route::get('/user/{user}/delete', [AdminController::class, 'deleteUser'])->name('deleteUser');
+    Route::resource('/', AdminController::class);
 
 
     Route::get('/service-category/{category}/disable', [ServiceCategoryController::class, 'disableCategory'])->name('disableCategory');
     Route::get('/service-category/{category}/enable', [ServiceCategoryController::class, 'enableCategory'])->name('enableCategory');
 
     Route::resources([
-        '/service-category' => ServiceCategoryController::class,
+        'service-category' => ServiceCategoryController::class,
     ]);
 });
 
