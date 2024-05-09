@@ -21,23 +21,29 @@
         <!-- /.card-header -->
         <!-- card body -->
         <div class="card-body">
-            <form
+            <form id="categoryForm"
                 action="@isset($serviceCategory){{ route('admin.service-category.update', $serviceCategory) }}@else {{ route('admin.service-category.store') }} @endisset "
-                method="POST">
+                method="POST" novalidate>
                 @csrf
                 @isset($serviceCategory)
                     @method('PUT')
                 @endisset
 
-                <x-forms.input label="Category Name" name="category_name"
-                    value="{{ old('category_name', isset($serviceCategory) ? $serviceCategory->category_name : '') }}"
-                    :isRequired="true" />
-                <x-forms.input name="description" label="Description"
-                    value="{{ old('description', isset($serviceCategory) ? $serviceCategory->description : '') }}"
-                    :isRequired="true" type="textarea" />
+                <div class="row g-3">
+                    <x-forms.input label="Category Name" name="category_name"
+                        value="{{ old('category_name', isset($serviceCategory) ? $serviceCategory->category_name : '') }}"
+                        :isRequired="true" />
+                    <x-forms.input name="description" label="Description"
+                        value="{{ old('description', isset($serviceCategory) ? $serviceCategory->description : '') }}"
+                        :isRequired="true" type="textarea" />
+
+                    <div class="col-12">
+                        <button type="submit" class="my-2 btn btn-primary">Submit</button>
+                    </div>
+
+                </div>
 
 
-                <button type="submit" class="my-2 btn btn-primary">Submit</button>
             </form>
         </div>
         <!-- /.card-body -->
@@ -48,6 +54,7 @@
 @endsection
 
 @push('scripts')
+ 
     <x-admin.packages.data-table-js />
     <script>
         $(function() {
@@ -59,5 +66,8 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
         });
+
+        // jquery-validation
+        
     </script>
 @endpush

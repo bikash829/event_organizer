@@ -16,7 +16,7 @@
                 {{-- alt="contact us banner" /> --}}
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d29252.103740141778!2d90.31838834999999!3d23.58592925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2sbd!4v1715189381084!5m2!1sen!2sbd"
-                    class="container-fluid rounded" height="400" allowfullscreen="" loading="lazy"
+                    class="container-fluid rounded" height="430" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
@@ -47,8 +47,6 @@
         </div>
     </div>
 
-
-    <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
 
     <!-- query alert -->
     {{-- @session('success')

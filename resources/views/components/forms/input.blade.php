@@ -4,8 +4,9 @@
 
 
 <div class="{{ $colSize }}">
+    <!-- form-label -->
     @if ($label)
-        <label for="input_{{ $id }}" class="form-label ">
+        <label for="input_{{ $id }}" class="form-label">
 
             {{ $label }} 
             @if ($isRequired)
