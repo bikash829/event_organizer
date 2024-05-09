@@ -174,11 +174,5 @@
                 responsive: true,
             });
         });
-
-
-
-        $(document).ready(function() {
-            alert("wow");
-        });
     </script>
 @endpush

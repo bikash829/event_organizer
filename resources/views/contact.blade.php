@@ -50,40 +50,27 @@
 
     <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
 
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
-                <strong class="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                Hello, world! This is a toast message.
-            </div>
-        </div>
-    </div>
+    <!-- query alert -->
+    {{-- @session('success')
+        <x-alert.toast title="Success" message="{{ session('success') }}" />
+        @push('scripts')
+            <script type="module">
+                bootstrap.Toast.getOrCreateInstance($('#toast')[0]).show();
+            </script>
+        @endpush
+    @endsession
+    @session('error')
+        <x-alert.toast title="Error" message="{{ session('error') }}" />
+        @push('scripts')
+            <script type="module">
+                bootstrap.Toast.getOrCreateInstance($('#toast')[0]).show();
+            </script>
+        @endpush
+    @endsession --}}
+
+    @foreach (['success', 'error'] as $status)
+        @session($status)
+            <x-alert.toast-alert :title="ucfirst($status)" message="{{ session('success') }}" />
+        @endsession
+    @endforeach
 @endsection
-
-
-
-@push('scripts')
-    <script type="module">
-        const toastTrigger = document.getElementById('liveToastBtn')
-        const toastLiveExample = document.getElementById('liveToast')
-
-        if (toastTrigger) {
-            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-            toastTrigger.addEventListener('click', () => {
-                toastBootstrap.show()
-            })
-        }
-        // $(document).ready(function() {
-
-
-        //     $('#liveToastBtn').click(function() {
-        //         bootstrap.Toast.getOrCreateInstance($('#liveToast')[0]).show();
-        //     });
-        // });
-    </script>
-@endpush
