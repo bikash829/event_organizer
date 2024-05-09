@@ -20,7 +20,7 @@
         rel="stylesheet">
     {{-- <link rel="stylesheet" href="{{ asset('assets/datatable/dataTables.jqueryui.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/datatable/jquery-ui.css') }}"> --}}
-
+    @stack('styles')
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -29,7 +29,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                {{-- <a class="navbar-brand" href="{{ url('/') }}"> --}}
+                {{-- <a class="navbar-brand" href="{{ url('/') }}"> --}}`
                 <a class="navbar-brand" href="{{ route('home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -129,5 +129,7 @@
         <x-modal.register />
     </div>
 </body>
+
+@stack('scripts')
 
 </html>

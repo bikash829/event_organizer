@@ -3,13 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Services\ContactService;
 use Illuminate\Http\Request;
+use App\Http\Requests\ContactRequest;
+use Illuminate\Support\Facades\Session;
 
 class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    // public $contact;
+
+
     public function index()
     {
         //
@@ -27,9 +33,22 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
         //
+        $request->validated();
+        // dd($request);
+        $contactData = (new ContactService)->store($request->validated());
+
+
+        if ($contactData) {
+            Session::flash('success', 'Your query has been sent successfully');
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
+
+
     }
 
     /**
@@ -51,7 +70,7 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contact $contact)
+    public function update(ContactRequest $request, Contact $contact)
     {
         //
     }

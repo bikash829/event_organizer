@@ -2,12 +2,88 @@
 
 @section('header')
     <!-- Carousel -->
-    <div class="">
-        That's the header of contact us page.
-    </div>
+
+    <x-layouts.banner imgLocation="./assets/images/banner/banner.jpeg" alt="contact us banner" />
+
     <!--./ Carousel -->
 @endsection
 
 @section('content')
-    <h1>Here you are inside contact us page.</h1>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="img-container">
+                {{-- <img class="img-fluid rounded " src="{{ asset('./assets/images/banner/banner.jpeg') }}" --}}
+                {{-- alt="contact us banner" /> --}}
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d29252.103740141778!2d90.31838834999999!3d23.58592925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2sbd!4v1715189381084!5m2!1sen!2sbd"
+                    class="container-fluid rounded" height="400" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('contact.store') }}" method="POST">
+                        @csrf
+                        <div class="row g-3">
+                            <x-forms.input label="Full Name" name="name" value="{{ old('name') }}" :isRequired="true" />
+                            <x-forms.input label="Email" colSize="col-md-6 col-12" name="email" type="email"
+                                value="{{ old('email') }}" :isRequired="true" />
+                            <x-forms.input label="Phone" colSize="col-md-6 col-12" class="col-12 col-md-6" maxLength="11"
+                                name="phone" value="{{ old('phone') }}" :isRequired="true" />
+                            <x-forms.input label="Subject" name="subject" value="{{ old('subject') }}" :isRequired="true" />
+                            <x-forms.input label="Message" name="message" value="{{ old('message') }}" type="textarea"
+                                :isRequired="true" />
+                            <div class="col-12 text-end">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+        </div>
+    </div>
 @endsection
+
+
+
+@push('scripts')
+    <script>
+        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastLiveExample = document.getElementById('liveToast')
+
+        if (toastTrigger) {
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastTrigger.addEventListener('click', () => {
+                toastBootstrap.show()
+            })
+        }
+        // $(document).ready(function() {
+
+
+        //     $('#liveToastBtn').click(function() {
+        //         bootstrap.Toast.getOrCreateInstance($('#liveToast')[0]).show();
+        //     });
+        // });
+    </script>
+@endpush
