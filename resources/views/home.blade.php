@@ -79,7 +79,7 @@
 
     <!-- Datatabel -->
     <section>
-        <table id="example" class="display" style="width:100%">
+        <table id="dataTable1" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -118,7 +118,7 @@
     <!-- users -->
     <!-- Datatabel -->
     <section>
-        <table id="users" class="display" style="width:100%">
+        <table id="dataTable2" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -159,3 +159,26 @@
     <!--./ Datatabel -->
 
 @endsection
+
+@push('scripts')
+    <script type="module">
+        // console.log("hello there");
+        // alert("wow");
+        $(document).ready(function() {
+            $("#dataTable1").DataTable({
+                responsive: true,
+            });
+        });
+        $(document).ready(function() {
+            $("#dataTable2").DataTable({
+                responsive: true,
+            });
+        });
+
+
+
+        $(document).ready(function() {
+            alert("wow");
+        });
+    </script>
+@endpush

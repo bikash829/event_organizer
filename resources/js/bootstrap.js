@@ -1,5 +1,9 @@
 import "bootstrap";
 
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
+
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -12,12 +16,15 @@ window.axios = axios;
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 // jQuery
-import $ from "jquery";
-window.$ = window.jQuery = $;
+import jQuery from 'jquery';
+window.$ = jQuery;
 
 //Data tables
 import DataTable from "datatables.net-jqui";
 import "datatables.net-responsive-jqui";
+
+
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

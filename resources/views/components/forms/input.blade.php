@@ -5,11 +5,11 @@
 
 <div class="{{ $colSize }}">
     @if ($label)
-        <label for="input_{{ $id }}">
+        <label for="input_{{ $id }}" class="form-label ">
 
-            <strong>{{ $label }} </strong>
+            {{ $label }} 
             @if ($isRequired)
-                <strong class="text-danger">*</strong>
+                <span class="text-danger">*</span>
             @endif
         </label>
     @endif

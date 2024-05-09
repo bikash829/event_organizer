@@ -68,7 +68,7 @@
 
 
 @push('scripts')
-    <script>
+    <script type="module">
         const toastTrigger = document.getElementById('liveToastBtn')
         const toastLiveExample = document.getElementById('liveToast')
 
