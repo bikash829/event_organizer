@@ -30,4 +30,28 @@ class ContactRequest extends FormRequest
             'message' => 'required|string',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    // public function messages(): array
+    // {
+    //     return [
+    //         'name.required' => 'Name is required',
+    //         'name.string' => 'Name must be a string',
+    //         'name.max' => 'Name must not be greater than 50 characters',
+    //         'email.required' => 'Email is required',
+    //         'email.email' => 'Email must be a valid email',
+    //         'phone.required' => 'Phone is required',
+    //         'phone.string' => 'Phone must be a string',
+    //         'phone.max' => 'Phone must not be greater than 15 characters',
+    //         'subject.required' => 'Subject is required',
+    //         'subject.string' => 'Subject must be a string',
+    //         'subject.max' => 'Subject must not be greater than 50 characters',
+    //         'message.required' => 'Message is required',
+    //         'message.string' => 'Message must be a string',
+    //     ];
+    // }
 }
