@@ -33,8 +33,16 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 // Route for services 
 Route::resource('services', ServiceController::class);
 
-// Route for blogs
-Route::resource('blogs', BlogController::class);
+// __________Route for blogs
+
+Route::prefix('blogs')->name('blog.')->group(function () {
+    Route::resource('/', BlogController::class);
+});
+
+
+
+
+
 
 // Route for FAQ
 Route::get('/faq', function () {

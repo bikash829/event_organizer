@@ -57,8 +57,8 @@
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::currentRouteName() == 'blogs.index' ? 'active' : '' }}"
-                                href="{{ route('blogs.index') }}">Blog</a>
+                            <a class="nav-link {{ Route::currentRouteName() == 'blog.index' ? 'active' : '' }}"
+                                href="{{ route('blog.index') }}">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Route::currentRouteName() == 'faq' ? 'active' : '' }}"

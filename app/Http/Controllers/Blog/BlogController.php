@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+// use App\Models\Blog;
 
 class BlogController extends Controller
 {
@@ -23,6 +24,7 @@ class BlogController extends Controller
     public function create()
     {
         //
+        return view('blogs.create');
     }
 
     /**
@@ -31,6 +33,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         //
+        return "you are here to store";
     }
 
     /**
@@ -39,6 +42,7 @@ class BlogController extends Controller
     public function show(Blog $blog)
     {
         //
+        return "you are here to show";
     }
 
     /**
@@ -47,6 +51,7 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         //
+        return "you are here to edit";
     }
 
     /**
@@ -55,6 +60,7 @@ class BlogController extends Controller
     public function update(Request $request, Blog $blog)
     {
         //
+        return "you are here to update";
     }
 
     /**
@@ -63,5 +69,6 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         //
+        return "you are here to destroy";
     }
 }

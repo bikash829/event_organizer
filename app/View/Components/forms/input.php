@@ -21,6 +21,7 @@ class input extends Component
         public string $maxLength = "",
         public string $minLength = "",
         public string $placeholder = "",
+        public string $rows = "",
         public string|null $id = null,
         public bool $isRequired = false, //boolean
         public string|null $errorKey = null,

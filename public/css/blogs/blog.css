@@ -1,0 +1,41 @@
+/**
+* Index blog 
+*/
+.card-container {
+    margin-top: 20px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.card {
+    border: none !important;
+    border-bottom: 1px solid #ccc !important;
+}
+
+.comments {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.comments__info {
+    /* background-color: #ccc */
+}
+
+.comment-container {
+    display: none;
+}
+
+.comments__user {
+}
+
+.comments__date {
+}
+
+.comments__body {
+}
+
+.comments__body p {
+    margin: 0;
+}
+
+/* Path: public/css/blogs/blog.css */

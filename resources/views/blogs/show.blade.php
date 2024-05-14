@@ -10,20 +10,25 @@
     <div class="container mt-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Blogs </li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('blog.create') }}">Create Blog
-                        Post</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Blog</li>
             </ol>
         </nav>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('blogs.index') }}">Blogs</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+            </ol>
+        </nav>
+
+
     </div>
     <!--./ Carousel -->
 @endsection
 
 @section('content')
 
-    <!--./ Create new blog -->
-
-    <div class="card-container"> <!--existed blogs card-container -->
+    <div class="card-container"> <!-- card-container -->
         <div class="card">
             <div class="row g-0">
                 <div class="col-md-4">
@@ -109,9 +114,15 @@
 
             </div>
         </div>
-    </div> <!--./ existed blogs card-container -->
+    </div> <!--./ card-container -->
+
+
+
+
+
 
 @endsection
 
 @push('scripts')
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 @endpush
