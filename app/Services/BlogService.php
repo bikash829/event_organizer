@@ -9,11 +9,11 @@ use App\Models\Blog;
 
 class BlogService
 {
-    public function storeData($request)
+    public function store($request)
     {
         $data = $request->validated();
-        $data["user_id"] = $request->user_id ?? auth()->id();
-        // $data["user_id"] = 1;
+        // $data["user_id"] = $request->user_id ?? auth()->id();
+        $data["user_id"] = 1;
 
         // dd($data);
         return Blog::create($data);

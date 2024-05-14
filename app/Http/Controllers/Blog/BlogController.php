@@ -5,10 +5,21 @@ namespace App\Http\Controllers\Blog;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use App\Http\Requests\Blog\BlogStoreRequest;
+use App\Services\BlogService;
+
 // use App\Models\Blog;
 
 class BlogController extends Controller
 {
+
+    protected $blogService;
+
+    public function __construct(BlogService $blogService)
+    {
+        $this->blogService = $blogService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -30,10 +41,23 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogStoreRequest $request)
     {
         //
-        return "you are here to store";
+        // $request['user_id'] = 1;
+        // if ($request->validated()) {
+        //     dd($request);
+        // }
+
+        if ($this->blogService->store($request)) {
+            $request->session()->flash('success', 'Blog Created Successfully');
+            return to_route('blog.index');
+
+        } else {
+            abort(403, 'Technical Error Occured.');
+        }
+
+
     }
 
     /**

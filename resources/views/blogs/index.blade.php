@@ -17,6 +17,7 @@
         </nav>
     </div>
     <!--./ Carousel -->
+
 @endsection
 
 @section('content')
@@ -111,7 +112,12 @@
         </div>
     </div> <!--./ existed blogs card-container -->
 
-@endsection
 
-@push('scripts')
-@endpush
+    <!-- toast alert -->
+    @foreach (['success', 'error'] as $status)
+        @session($status)
+            <x-alert.toast-alert :title="ucfirst($status)" message="{{ session('success') }}" />
+        @endsession
+    @endforeach
+
+@endsection
