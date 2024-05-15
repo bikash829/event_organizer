@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Blog;
 
 
+
 // use Illuminate\Http\Request;
 
 class BlogService
@@ -28,19 +29,24 @@ class BlogService
         return $blog;
     }
 
+    // public function getAll()
+    // {
+    //     $user_id = request('id');
+    //     // return Blog::whereDate('published_at', '>', now())->get();
+
+    //     // $blogs = Blog::latest()->paginate(10);
+    //     // dd($blogs);
+    //     $blogs = Blog::whereNull('published_at')->orWhereDate('published_at', '>=', now());
+    //     if ($user_id) {
+    //         $blogs = $blogs->where('user_id', $user_id);
+    //     }
+    //     return $blogs->orderBy('published_at', 'desc')->paginate(10);
+    //     // return $blogs;
+    // }
     public function getAll()
     {
-        $user_id = request('id');
-        // return Blog::whereDate('published_at', '>', now())->get();
 
-        // $blogs = Blog::latest()->paginate(10);
-        // dd($blogs);
-        $blogs = Blog::whereNull('published_at')->orWhereDate('published_at', '>=', now());
-        if ($user_id) {
-            $blogs = $blogs->where('user_id', $user_id);
-        }
-        return $blogs->orderBy('published_at', 'desc')->paginate(10);
-        // return $blogs;
+        return Blog::orderBy('created_at', 'desc')->paginate(10);
     }
 
 }

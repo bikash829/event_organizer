@@ -4,15 +4,12 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use Illuminate\Http\Request;
-use App\Http\Requests\Blog\BlogStoreRequest;
+use App\Http\Requests\StoreBlogRequest;
+use App\Http\Requests\UpdateBlogRequest;
 use App\Services\BlogService;
-
-// use App\Models\Blog;
 
 class BlogController extends Controller
 {
-
     protected $blogService;
 
     public function __construct(BlogService $blogService)
@@ -25,8 +22,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
-        return view('blogs.index');
+        $blogs = $this->blogService->getAll();
+        return view('blogs.index', compact('blogs'));
     }
 
     /**
@@ -34,21 +31,14 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
         return view('blogs.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BlogStoreRequest $request)
+    public function store(StoreBlogRequest $request)
     {
-        //
-        // $request['user_id'] = 1;
-        // if ($request->validated()) {
-        //     dd($request);
-        // }
-
         if ($this->blogService->store($request)) {
             $request->session()->flash('success', 'Blog Created Successfully');
             return to_route('blog.index');
@@ -56,8 +46,6 @@ class BlogController extends Controller
         } else {
             abort(403, 'Technical Error Occured.');
         }
-
-
     }
 
     /**
@@ -66,7 +54,7 @@ class BlogController extends Controller
     public function show(Blog $blog)
     {
         //
-        return "you are here to show";
+        return "Show Blog";
     }
 
     /**
@@ -75,16 +63,16 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         //
-        return "you are here to edit";
+        return "Edit Blog";
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blog $blog)
+    public function update(UpdateBlogRequest $request, Blog $blog)
     {
         //
-        return "you are here to update";
+        return "Update Blog";
     }
 
     /**
@@ -93,6 +81,6 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         //
-        return "you are here to destroy";
+        return "Delete Blog";
     }
 }

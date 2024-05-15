@@ -17,12 +17,12 @@ function isAnyRoute($route, $class = 'menu-open active')
 }
 
 
-function fullName($first_name = '', $last_name = '')
+function fullName($first_name = '', $last_name = '') // get full name
 {
     return $first_name . ' ' . $last_name;
 }
 
-function getRole($role)
+function getRole($role) // get role names from array
 {
     $roles = "";
 
@@ -35,8 +35,15 @@ function getRole($role)
 
 }
 
-function formattedDate($date)
+function formattedDate($date) // date format 25 January 2021
 {
     $date = new DateTime($date);
     return $date->format('j F Y');
+}
+
+use Illuminate\Support\Str;
+
+function wordLimit($string, $limit = 10) // limit words
+{
+    return Str::words($string, $limit);
 }

@@ -6,7 +6,8 @@ use App\Http\Controllers\About\AboutController;
 // use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Service\ServiceController;
-use App\Http\Controllers\Blog\BlogController;
+use App\Http\Controllers\Blog\BlogController; // controller for blog
+
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
@@ -34,10 +35,15 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::resource('services', ServiceController::class);
 
 // __________Route for blogs
-
-Route::prefix('blogs')->name('blog.')->group(function () {
-    Route::resource('/', BlogController::class);
-});
+Route::resource('blog', BlogController::class)->names([
+    'index' => 'blog.index',
+    'create' => 'blog.create',
+    'store' => 'blog.store',
+    'show' => 'blog.show',
+    'edit' => 'blog.edit',
+    'update' => 'blog.update',
+    'destroy' => 'blog.destroy',
+]  );
 
 
 
