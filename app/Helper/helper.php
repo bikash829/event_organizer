@@ -17,9 +17,13 @@ function isAnyRoute($route, $class = 'menu-open active')
 }
 
 
-function fullName($first_name = '', $last_name = '') // get full name
+// function fullName($first_name = '', $last_name = '') // get full name
+// {
+//     return $first_name . ' ' . $last_name;
+// }
+function fullName($user) // get full name
 {
-    return $first_name . ' ' . $last_name;
+    return $user->first_name ?? '' . ' ' . $user->last_name ?? '';
 }
 
 function getRole($role) // get role names from array

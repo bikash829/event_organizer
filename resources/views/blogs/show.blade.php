@@ -40,7 +40,7 @@
                             <div class="col-auto ">
                                 <div class="my-2">
                                     <h4 class="card-title text-muted">
-                                        {{ fullName($blog->user->first_name, $blog->user->last_name) }}</h4>
+                                        {{ fullName($blog->user) }}</h4>
                                     <h5 class=" text-muted">
                                         {{ ucfirst(getRole($blog->user->getRoleNames())) }}</h5>
                                     <p class="card-text text-end"><small class="text-body-secondary">Last updated
@@ -106,10 +106,12 @@
                 <div class="comments__body card-body">
 
                     <div class="comment__form">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form method="POST" enctype="multipart/form-data"
+                            action="{{ route('blog.comment.store', $blog) }}">
                             @csrf
+                            @method('POST')
                             <div class="row g-2">
-                                <x-forms.input type="textarea" placeholder="Write your comment Hre" name="subject" />
+                                <x-forms.input type="textarea" placeholder="Write your comment Hre" name="comment" />
 
                                 <div class="col-12 text-end">
                                     <button type="submit" class="btn btn-sm btn-secondary">Post</button>
@@ -122,27 +124,49 @@
                 </div>
 
             </div>
-            <div class="comments card">
-                <div class="comments__body card-body">
-                    <div class="comments__info card-title ">
-                        <div class="row">
 
-                            <div class="comments__user col-8"><strong>Bikash Chwodhury</strong> </div>
-                            <div class="comments__date col-4 text-end"><span class="text-muted">5-7-2005</span> </div>
+            @foreach ($blog->comments as $comment)
+                <div class="comments card">
+                    <div class="comments__body card-body">
+                        <div class="comments__info card-title ">
+                            <div class="row">
+
+                                <div class="comments__user col-8"><strong>{{ fullName($comment->user) }}</strong> </div>
+                                <div class="comments__settings col-4 text-end">
+
+                                    <a class="pe-2" href="#">Edit</a>
+                                    <a class="text-danger" href="#">Delete</a>
+
+
+
+                                </div>
+                            </div>
                         </div>
+                        <p>{{ $comment->comment }}</p>
                     </div>
-                    <p>Bro ipsum dolor sit amet pow pow pow big ring white room, misty park rat shreddin. First tracks crank
-                        huck, grab dope stunt rock-ectomy gorby carbon pipe. Air carbon yard sale, first tracks poaching
-                        butter
-                        sucker hole skid lid fatty over the bars derailleur back country chain ring huckfest. Deck travel
-                        trucks
-                        reverse camber, presta titanium poaching brain bucket daffy McTwist stomp bomb wheels. Bear trap
-                        schwag
-                        cornice, over the bars epic 180 ripping. Yard sale fatty 180 pow grind, huck sharkbite 180 switch.
-                        Presta manny ski bum, back country frontside road rash whip clipless table top bro.</p>
-                </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="text-muted
+                                    text-decoration-none">{{ $comment->created_at->diffForHumans() }}</span>
+                                    <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Reply</a>
+                                    <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
+                                        class="badge text-bg-secondary">4</span></a>
 
-            </div>
+                            </div>
+                            <div class="col-6   text-end">
+                                <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
+                                        class="badge text-bg-secondary">4</span></a>
+                                <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Reply</a>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+
+
+                </div>
+            @endforeach
         </div>
         <!--./ Comment Section -->
 

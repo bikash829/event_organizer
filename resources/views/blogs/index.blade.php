@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="col-8">
                                         <a href="#"
-                                            class="text-decoration-none text-dark"><strong>{{ fullName($blog->user->first_name, $blog->user->last_name) }}</strong></a>
+                                            class="text-decoration-none text-dark"><strong>{{ fullName($blog->user) }}</strong></a>
                                     </div>
                                     <div class="col-4">
                                         <p class="card-text text-end"><small
