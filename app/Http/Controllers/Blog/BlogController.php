@@ -8,6 +8,9 @@ use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Services\BlogService;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session; // session flashback message
+
 class BlogController extends Controller
 {
     protected $blogService;
@@ -53,8 +56,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
-        return "Show Blog";
+        return view('blogs.show', compact('blog'));
     }
 
     /**
@@ -62,8 +64,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
-        return "Edit Blog";
+        return view('blogs.edit', compact('blog'));
     }
 
     /**
@@ -71,8 +72,10 @@ class BlogController extends Controller
      */
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        //
-        return "Update Blog";
+
+        $blog = $this->blogService->update($request, $blog);
+        $request->session()->flash('success', 'Blog Updated Successfully');
+        return to_route('blog.show', $blog);
     }
 
     /**
@@ -80,7 +83,8 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
-        return "Delete Blog";
+        $blog->delete();
+        Session::flash('success', 'Blog Updated Successfully');
+        return to_route('blog.index');
     }
 }

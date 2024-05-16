@@ -31,23 +31,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 
-// Route for services 
+// --------------Route for services 
 Route::resource('services', ServiceController::class);
-
-// __________Route for blogs
-Route::resource('blog', BlogController::class)->names([
-    'index' => 'blog.index',
-    'create' => 'blog.create',
-    'store' => 'blog.store',
-    'show' => 'blog.show',
-    'edit' => 'blog.edit',
-    'update' => 'blog.update',
-    'destroy' => 'blog.destroy',
-]  );
-
-
-
-
 
 
 // Route for FAQ
@@ -62,7 +47,7 @@ Route::resource('contact', ContactController::class);
 
 
 
-//admin routes 
+//__________________admin routes 
 //Manager users 
 // prefix 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -74,8 +59,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/user/{user}/block', [AdminController::class, 'blockUser'])->name('blockUser');
     Route::get('/user/{user}/unblock', [AdminController::class, 'unblockUser'])->name('unblockUser');
     Route::get('/user/{user}/delete', [AdminController::class, 'deleteUser'])->name('deleteUser');
-    Route::resource('/', AdminController::class);
-
+    
 
     Route::get('/service-category/{category}/disable', [ServiceCategoryController::class, 'disableCategory'])->name('disableCategory');
     Route::get('/service-category/{category}/enable', [ServiceCategoryController::class, 'enableCategory'])->name('enableCategory');
@@ -85,21 +69,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
     ]);
 });
 
-
-
-// Route::resource('/admin/user', UserController::class)->name('admin');
-// Route::get('/admin/user/all-user', [AdminController::class, 'pendingSeller'])->name('admin.allUser');
-// Route::resource('admin', AdminController::class);
-
-// Route::get('/admin/service-category', [ServiceCategoryController::class, 'index'])->name('admin.serviceCategory');
-
-
-// prefix 
+Route::resource('admin', AdminController::class);
 
 
 
 
 
 
-// User resource route
+// ____________________User resource route
 Route::resource('user', UserController::class);
+
+
+// ______________Route for blogs
+Route::resource('blog', BlogController::class);
+
+
+

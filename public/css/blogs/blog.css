@@ -38,4 +38,11 @@
     margin: 0;
 }
 
+/** show blog */
+
+.blog-header img {
+    max-height: 100px;
+    max-width: 100px;
+}
+
 /* Path: public/css/blogs/blog.css */

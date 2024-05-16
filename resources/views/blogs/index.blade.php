@@ -11,6 +11,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">Blogs </li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('blog.create') }}">My Blogs</a>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('blog.create') }}">Create Blog
                         Post</a></li>
             </ol>
@@ -44,13 +45,20 @@
                                     </div>
                                     <div class="col-4">
                                         <p class="card-text text-end"><small
-                                                class="text-body-secondary">{{ $blog->created_at }}</small></p>
+                                                class="text-body-secondary">{{ $blog->created_at->diffForHumans() }}</small></p>
                                     </div>
                                 </div>
                             </div>
                             <h5 class="card-title">{{ $blog->title }}</h5>
                             <p class="card-text">{{ wordLimit($blog->content, 30) }}</p>
-                            <a href="{{ route('blog.show', $blog) }}" class="btn btn-secondary">Read More</a>
+                            {{-- <a href="{{ route('blog.show', $blog) }}" class="btn btn-secondary">Read More</a> --}}
+                            <form action="{{ route('blog.show', $blog) }}">
+                                @csrf
+                                @method('GET')
+                                <button type="submit" class="btn btn-secondary">Read More</button>
+
+                            </form>
+
                         </div>
 
                         <div class="card-footer bg-transparent border-0 position-absolute bottom-0 end-0">

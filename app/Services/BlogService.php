@@ -20,13 +20,9 @@ class BlogService
         return Blog::create($data);
 
     }
-    public function updateData($request, $blog)
+    public function update($request, $blog)
     {
-        $data = $request->validated();
-        $data["user_id"] = $request->user_id ?? auth()->id();
-        // $data["user_id"] = 1;
-        $blog->update($data);
-        return $blog;
+        return $blog->update($request->validated());
     }
 
     // public function getAll()
@@ -45,8 +41,13 @@ class BlogService
     // }
     public function getAll()
     {
-
         return Blog::orderBy('created_at', 'desc')->paginate(10);
+    }
+
+
+    public function show($blog)
+    {
+        return Blog::findOrFail($blog);
     }
 
 }
