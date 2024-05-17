@@ -45,7 +45,8 @@
                                     </div>
                                     <div class="col-4">
                                         <p class="card-text text-end"><small
-                                                class="text-body-secondary">{{ $blog->created_at->diffForHumans() }}</small></p>
+                                                class="text-body-secondary">{{ $blog->created_at->diffForHumans() }}</small>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +67,7 @@
                                 <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
                                         class="badge text-bg-secondary">4</span></a>
                                 <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Comment <span
-                                        class="badge text-bg-secondary">4</span></a>
+                                        class="badge text-bg-secondary">{{ $blog->comments->count() }}</span></a>
                                 <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Share <span
                                         class="badge text-bg-secondary">4</span></a>
                             </div>
@@ -123,6 +124,11 @@
         </div>
         <!--./ existed blogs card-container -->
     @endforeach
+    <div class="py-2 d-flex justify-content-center">
+        {{ $blogs->links() }}
+    </div>
+
+
     <!-- toast alert -->
     @foreach (['success', 'error'] as $status)
         @session($status)

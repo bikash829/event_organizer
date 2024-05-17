@@ -91,7 +91,7 @@
                     <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
                             class="badge text-bg-secondary">4</span></a>
                     <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Comment <span
-                            class="badge text-bg-secondary">4</span></a>
+                            class="badge text-bg-secondary">{{$blog->comments->count()}}</span></a>
                     <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Share <span
                             class="badge text-bg-secondary">4</span></a>
                 </div>
@@ -147,11 +147,12 @@
                     <div class="card-footer bg-transparent border-0">
                         <div class="row">
                             <div class="col-6">
-                                <span class="text-muted
+                                <span
+                                    class="text-muted
                                     text-decoration-none">{{ $comment->created_at->diffForHumans() }}</span>
-                                    <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Reply</a>
-                                    <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
-                                        class="badge text-bg-secondary">4</span></a>
+                                {{-- <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Reply</a>
+                                <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
+                                        class="badge text-bg-secondary">4</span></a> --}}
 
                             </div>
                             <div class="col-6   text-end">
@@ -160,7 +161,7 @@
                                 <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Reply</a>
                             </div>
                         </div>
-                        
+
 
                     </div>
 
