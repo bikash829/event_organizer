@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog; // Blog Model
-use App\Models\Like; // Like Model
 use App\Http\Requests\StoreBlogRequest; // Blog Store Request
-use App\Http\Requests\UpdateBlogRequest; // 
-use App\Services\BlogService;
-// use App\Traits\LikeTrait;
-
+use App\Http\Requests\UpdateBlogRequest; // Blog Update Request
+use App\Services\BlogService; // Blog Service
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session; // session flashback message

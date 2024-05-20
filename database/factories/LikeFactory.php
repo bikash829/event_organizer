@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Http\Requests\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Blog; // Import the Blog class from the correct namespace
+use App\Models\BlogComment; // Import the BlogComment class from the correct namespace
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Like>
@@ -19,9 +21,17 @@ class LikeFactory extends Factory
     {
         return [
             //
-            'user_id' => User::factory(),
-            'likeable_id' => $this->faker->numberBetween(1, 100),
-            'likeable_type' => $this->faker->randomElement(['App\Models\Blog', 'App\Models\BlogComment']),
+            // ...
+
+            'user_id' => fake()->randomElement(User::pluck('id')->toArray()),
+            'likeable_id' => fake()->randomElement(
+                array_merge(
+                    Blog::pluck('id')->toArray(),
+                    BlogComment::pluck('id')->toArray()
+                )
+            ),
+            // 'likeable_id' => fake()->randomElement(Blog::pluck('id')->toArray()),
+            'likeable_type' => fake()->randomElement(['App\Models\Blog', 'App\Models\BlogComment']),
         ];
     }
 }

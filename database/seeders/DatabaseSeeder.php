@@ -58,7 +58,6 @@ class DatabaseSeeder extends Seeder
             unset($user['role']); // remove role from array to prevent it from being passed to create method
 
             $user = User::factory()->create($user);
-            // $user = User::create($user);
             $user->assignRole($role);
         }
 
@@ -81,13 +80,12 @@ class DatabaseSeeder extends Seeder
 
 
         // ______________create factory data for BlogFactory
-        Blog::factory(10)->create();
+        Blog::factory(5)->create();
 
         // ______________create factory data for BlogCommentFactory
         BlogComment::factory(30)->create();
 
-
-
-
+        // ______________create factory data for LikeFactory
+        Like::factory(200)->create();
     }
 }

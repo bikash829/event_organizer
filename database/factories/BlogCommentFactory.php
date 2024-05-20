@@ -21,8 +21,8 @@ class BlogCommentFactory extends Factory
     {
         return [
             'comment' => fake()->text(200),
-            'blog_id' => Blog::factory(),
-            'user_id' => User::factory(),
+            'blog_id' => fake()->randomElement(Blog::pluck('id')->toArray()),
+            'user_id' => fake()->randomElement(User::pluck('id')->toArray()),
         ];
     }
 }

@@ -19,9 +19,8 @@ class BlogFactory extends Factory
     {
         return [
             'title' => fake()->text(20),
-            'content' => fake()->text(400),
-            // 'email_verified_at' => now(),
-            'user_id' => User::factory(),
+            'content' => fake()->paragraph(),
+            'user_id' => fake()->randomElement(User::pluck('id')->toArray()),
         ];
     }
 }
