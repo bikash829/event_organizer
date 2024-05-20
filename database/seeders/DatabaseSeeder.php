@@ -6,7 +6,9 @@ namespace Database\Seeders;
 use App\Models\User; // User Model
 use App\Models\ServiceCategory; // ServiceCategory Model
 use App\Models\Blog; // Blog Model
-use App\Models\BlogComment; // Blog Model
+use App\Models\BlogComment; // BlogComment Model
+use App\Models\Like; // Like Model
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -83,6 +85,8 @@ class DatabaseSeeder extends Seeder
 
         // ______________create factory data for BlogCommentFactory
         BlogComment::factory(30)->create();
+
+
 
 
     }

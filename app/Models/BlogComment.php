@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo; // BelongsTo added
+use Illuminate\Database\Eloquent\Relations\MorphMany; // MorphMany added
 // use Illuminate\Database\Eloquent\Relations\HasMany; // BelongsTo added
+
 
 class BlogComment extends Model
 {
@@ -20,8 +22,15 @@ class BlogComment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function blog() : BelongsTo
+    public function blog(): BelongsTo
     {
         return $this->belongsTo(Blog::class);
     }
+
+    public function likes(): MorphMany
+    {
+        // return $this->hasMany(Like::class, 'likeable_id')->where('likeable_type', Blog::class);
+        return $this->morphMany(Like::class, 'likeable');  // with likable column to likes migration table
+    }
+
 }

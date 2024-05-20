@@ -2,14 +2,28 @@
 
 namespace App\Services;
 
-use App\Models\Blog;
+use App\Models\Blog; // Model Blog is imported
+use App\Traits\LikeTrait; // Like train imported
 
-
-
-// use Illuminate\Http\Request;
 
 class BlogService
 {
+    use LikeTrait;
+
+
+    /**
+     * Getting all blogs 
+     */
+    public function getAll()
+    {
+        return Blog::with('user:id,first_name,last_name')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+    }
+
+    /**
+     * store blog
+     */
     public function store($request)
     {
         $data = $request->validated();
@@ -20,6 +34,36 @@ class BlogService
         return Blog::create($data);
 
     }
+
+    /**
+     * Getting a single blog
+     */
+    public function show($blog)
+    {
+        // $blog->loadCount(['likes','comments.likes']);
+        // $blog->loadCount(['likes', 'comments'])
+        //     ->load([
+        //         'comments' => function ($query) {
+        //             $query->withCount('likes');
+        //         }
+        //     ]); // eager loading to count likes
+
+        return $blog;
+    }
+
+    /**
+     * like blog 
+     */
+    public function like($blog)
+    {
+        // $this->blogService->like($blog);
+        return $this->likable($blog);
+    }
+
+
+    /**
+     * Update blog
+     */
     public function update($request, $blog)
     {
         return $blog->update($request->validated());
@@ -39,15 +83,9 @@ class BlogService
     //     return $blogs->orderBy('published_at', 'desc')->paginate(10);
     //     // return $blogs;
     // }
-    public function getAll()
-    {
-        return Blog::orderBy('created_at', 'desc')->paginate(10);
-    }
 
 
-    public function show($blog)
-    {
-        return Blog::findOrFail($blog);
-    }
+
+
 
 }

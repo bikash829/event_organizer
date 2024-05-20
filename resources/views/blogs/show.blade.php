@@ -13,7 +13,6 @@
                 <li class="breadcrumb-item active" aria-current="page">Blog</li>
             </ol>
         </nav>
-
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Blogs</a></li>
@@ -46,7 +45,6 @@
                                     <p class="card-text text-end"><small class="text-body-secondary">Last updated
                                             {{ $blog->updated_at->diffForHumans() }}
                                         </small></p>
-
                                 </div>
                             </div>
                         </div>
@@ -67,36 +65,29 @@
                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
                             </form>
                         </div>
-
                     </div>
-
                 </div>
-
-
             </div>
 
             <div class="card-body">
                 <div class="text-center">
                     <img src="{{ asset('assets/images/slider/slider2.jpg') }}" class="rounded col-md-6" alt="...">
                 </div>
-
-
                 <h5 class="card-title">{{ $blog->title }}</h5>
                 <p class="card-text">{{ $blog->content }}</p>
-
             </div>
 
             <div class="card-footer bg-transparent border-0 position-relative bottom-0 end-0">
                 <div class="text-end">
-                    <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
-                            class="badge text-bg-secondary">4</span></a>
+                    <a href="{{ route('blog.like', $blog) }}"
+                        class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
+                            class="badge text-bg-secondary">{{ $blog->likes_count }}</span></a>
                     <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Comment <span
-                            class="badge text-bg-secondary">{{$blog->comments->count()}}</span></a>
+                            class="badge text-bg-secondary">{{ $blog->comments_count }}</span></a>
                     <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Share <span
                             class="badge text-bg-secondary">4</span></a>
                 </div>
             </div>
-
         </div>
         <!--./ Blog Card -->
 
@@ -112,7 +103,6 @@
                             @method('POST')
                             <div class="row g-2">
                                 <x-forms.input type="textarea" placeholder="Write your comment Hre" name="comment" />
-
                                 <div class="col-12 text-end">
                                     <button type="submit" class="btn btn-sm btn-secondary">Post</button>
                                 </div>
@@ -122,7 +112,6 @@
 
                     </div>
                 </div>
-
             </div>
 
             @foreach ($blog->comments as $comment)
@@ -130,15 +119,10 @@
                     <div class="comments__body card-body">
                         <div class="comments__info card-title ">
                             <div class="row">
-
                                 <div class="comments__user col-8"><strong>{{ fullName($comment->user) }}</strong> </div>
                                 <div class="comments__settings col-4 text-end">
-
                                     <a class="pe-2" href="#">Edit</a>
                                     <a class="text-danger" href="#">Delete</a>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -153,24 +137,19 @@
                                 {{-- <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Reply</a>
                                 <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
                                         class="badge text-bg-secondary">4</span></a> --}}
-
                             </div>
                             <div class="col-6   text-end">
-                                <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
-                                        class="badge text-bg-secondary">4</span></a>
+                                <a href="{{ route('blogComment.like', $comment) }}"
+                                    class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
+                                        class="badge text-bg-secondary">{{ $comment->likes_count }}</span></a>
                                 <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Reply</a>
                             </div>
                         </div>
-
-
                     </div>
-
-
                 </div>
             @endforeach
         </div>
         <!--./ Comment Section -->
-
     </div> <!--./ card-container -->
 
 @endsection

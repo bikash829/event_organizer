@@ -10,14 +10,18 @@ use App\Services\BlogCommentService; // Service class
 use App\Models\Blog; // Blog Model
 
 
+
 class BlogCommentController extends Controller
 {
     protected $blogCommentService;
-    // Service constructor 
+    /**
+     * Service constructor
+     */
     public function __construct(BlogCommentService $blogCommentService)
     {
         $this->blogCommentService = $blogCommentService;
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -40,12 +44,8 @@ class BlogCommentController extends Controller
      */
     public function store(StoreBlogCommentRequest $request, Blog $blog)
     {
-
-        // dd($blog, $request);
         $comments = $this->blogCommentService->store($request, $blog);
-
-        return to_route('blog.show',compact('blog', 'comments'));
-
+        return to_route('blog.show', compact('blog', 'comments'));
     }
 
     /**
@@ -66,6 +66,15 @@ class BlogCommentController extends Controller
     }
 
     /**
+     * Comment like 
+     */
+    public function like(BlogComment $blogComment)
+    {
+        $this->blogCommentService->like($blogComment);
+        return back();
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateBlogCommentRequest $request, BlogComment $blogComment)
@@ -80,4 +89,6 @@ class BlogCommentController extends Controller
     {
         return "comment destroy";
     }
+
+
 }

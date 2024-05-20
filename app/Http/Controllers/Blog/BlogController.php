@@ -3,16 +3,21 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
-use App\Models\Blog;
-use App\Http\Requests\StoreBlogRequest;
-use App\Http\Requests\UpdateBlogRequest;
+use App\Models\Blog; // Blog Model
+use App\Models\Like; // Like Model
+use App\Http\Requests\StoreBlogRequest; // Blog Store Request
+use App\Http\Requests\UpdateBlogRequest; // 
 use App\Services\BlogService;
+// use App\Traits\LikeTrait;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session; // session flashback message
 
 class BlogController extends Controller
 {
+
+    // use LikeTrait;
     protected $blogService;
 
     public function __construct(BlogService $blogService)
@@ -26,6 +31,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = $this->blogService->getAll();
+        // dd($blogs->toArray());
         return view('blogs.index', compact('blogs'));
     }
 
@@ -56,6 +62,9 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
+        // dd(Like::all());
+        
+        $blog = $this->blogService->show($blog);
         return view('blogs.show', compact('blog'));
     }
 
@@ -86,5 +95,12 @@ class BlogController extends Controller
         $blog->delete();
         Session::flash('success', 'Blog Updated Successfully');
         return to_route('blog.index');
+    }
+
+
+    public function like(Blog $blog)
+    {
+        $this->blogService->like($blog);
+        return back();
     }
 }

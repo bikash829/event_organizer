@@ -65,8 +65,8 @@
                         <div class="card-footer bg-transparent border-0 position-absolute bottom-0 end-0">
                             <div class="text-end">
                                 <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
-                                        class="badge text-bg-secondary">4</span></a>
-                                <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Comment <span
+                                        class="badge text-bg-secondary">{{$blog->likes_count}}</span></a>
+                                <a href="{{ route('blog.show', $blog) }}" class="btn btn-sm btn-link text-dark text-decoration-none">Comment <span
                                         class="badge text-bg-secondary">{{ $blog->comments->count() }}</span></a>
                                 <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Share <span
                                         class="badge text-bg-secondary">4</span></a>

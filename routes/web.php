@@ -33,10 +33,18 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 // --------------Route for services 
 Route::resource('services', ServiceController::class);
 
+
+
 // ______________Route for blogs
 Route::resource('blog', BlogController::class);
 // ______________Route for blog comment
 Route::resource('blog.comment', BlogCommentController::class);
+
+// _____________Route for like and comment
+Route::get('/blog-like/{blog}', [BlogController::class, 'like'])->name('blog.like');
+Route::get('/comment-like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');
+
+
 
 // --------------Route for FAQ
 Route::get('/faq', function () {
