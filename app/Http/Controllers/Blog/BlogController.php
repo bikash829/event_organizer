@@ -49,7 +49,7 @@ class BlogController extends Controller
     public function store(StoreBlogRequest $request)
     {
         if ($this->blogService->store($request)) {
-            $request->session()->flash('success', 'Blog Created Successfully');
+            $request->session()->flash('success', 'Blog Created Successfully!');
             return to_route('blog.index');
 
         } else {
@@ -62,10 +62,17 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        // dd(Like::all());
-        
         $blog = $this->blogService->show($blog);
         return view('blogs.show', compact('blog'));
+    }
+
+    /**
+     * Like the specified resource.
+     */
+    public function like(Blog $blog)
+    {
+        $this->blogService->like($blog);
+        return back();
     }
 
     /**
@@ -82,8 +89,12 @@ class BlogController extends Controller
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
 
-        $blog = $this->blogService->update($request, $blog);
-        $request->session()->flash('success', 'Blog Updated Successfully');
+        if ($this->blogService->update($request, $blog)) {
+            $request->session()->flash('success', 'Blog Updated Successfully');
+        } else {
+            $request->session()->flash('success', 'Count not update blog. Please try again.');
+        }
+
         return to_route('blog.show', $blog);
     }
 
@@ -98,9 +109,4 @@ class BlogController extends Controller
     }
 
 
-    public function like(Blog $blog)
-    {
-        $this->blogService->like($blog);
-        return back();
-    }
 }

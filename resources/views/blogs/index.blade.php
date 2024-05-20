@@ -54,8 +54,8 @@
                             <p class="card-text">{{ wordLimit($blog->content, 30) }}</p>
                             {{-- <a href="{{ route('blog.show', $blog) }}" class="btn btn-secondary">Read More</a> --}}
                             <form action="{{ route('blog.show', $blog) }}">
-                                @csrf
-                                @method('GET')
+                                {{-- @csrf --}}
+                                {{-- @method('GET') --}}
                                 <button type="submit" class="btn btn-secondary">Read More</button>
 
                             </form>
@@ -64,12 +64,12 @@
 
                         <div class="card-footer bg-transparent border-0 position-absolute bottom-0 end-0">
                             <div class="text-end">
-                                <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
+                                <a href="{{route('blog.like', $blog)}}" class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
                                         class="badge text-bg-secondary">{{$blog->likes_count}}</span></a>
                                 <a href="{{ route('blog.show', $blog) }}" class="btn btn-sm btn-link text-dark text-decoration-none">Comment <span
                                         class="badge text-bg-secondary">{{ $blog->comments->count() }}</span></a>
                                 <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Share <span
-                                        class="badge text-bg-secondary">4</span></a>
+                                        class="badge text-bg-secondary">0</span></a>
                             </div>
                         </div>
                     </div>

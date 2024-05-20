@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Requests\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,9 @@ class LikeFactory extends Factory
     {
         return [
             //
+            'user_id' => User::factory(),
+            'likeable_id' => $this->faker->numberBetween(1, 100),
+            'likeable_type' => $this->faker->randomElement(['App\Models\Blog', 'App\Models\BlogComment']),
         ];
     }
 }

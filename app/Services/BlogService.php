@@ -16,9 +16,20 @@ class BlogService
      */
     public function getAll()
     {
-        return Blog::with('user:id,first_name,last_name')
+
+        $blogs = Blog::with([
+            'user:id,first_name,last_name,email',
+            'comments' => function ($query) {
+                $query->orderBy('created_at', 'desc')
+                    ->withCount('likes')
+                    ->with('user:id,first_name,last_name,email');
+            }
+        ])
+            ->withCount('likes', 'comments') // eager loading to count likes and comments those are modal functions
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+
+        return $blogs;
     }
 
     /**
@@ -30,7 +41,6 @@ class BlogService
         // $data["user_id"] = $request->user_id ?? auth()->id();
         $data["user_id"] = 1;
 
-        // dd($data);
         return Blog::create($data);
 
     }
@@ -40,6 +50,16 @@ class BlogService
      */
     public function show($blog)
     {
+        $blog->loadCount(['likes', 'comments'])
+            ->load([
+                'user:id,first_name,last_name,email',
+                'comments' => function ($query) {
+                    $query->orderBy('created_at', 'desc')
+                        ->withCount('likes')
+                        ->with('user:id,first_name,last_name,email');
+                },
+            ]);
+
         // $blog->loadCount(['likes','comments.likes']);
         // $blog->loadCount(['likes', 'comments'])
         //     ->load([
@@ -56,7 +76,6 @@ class BlogService
      */
     public function like($blog)
     {
-        // $this->blogService->like($blog);
         return $this->likable($blog);
     }
 
