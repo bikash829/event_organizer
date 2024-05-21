@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog; // Blog Model
 use App\Http\Requests\StoreBlogRequest; // Blog Store Request
 use App\Http\Requests\UpdateBlogRequest; // Blog Update Request
+use App\Http\Requests\LikeRequest; // Blog Like Request
 use App\Services\BlogService; // Blog Service
 
 use Illuminate\Http\Request;
+
 // use Illuminate\Support\Facades\Session; // session flashback message
 
 class BlogController extends Controller
@@ -68,9 +70,12 @@ class BlogController extends Controller
     /**
      * Like the specified resource.
      */
-    public function like(Blog $blog)
+    public function like(LikeRequest $request)
     {
-        $this->blogService->like($blog);
+        // dd($request->blog_id);
+        dd($request->type);
+        $this->blogService->like($request->blog_id);
+
         return back();
     }
 

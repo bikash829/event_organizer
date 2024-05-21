@@ -87,9 +87,16 @@
 
             <div class="card-footer bg-transparent border-0 position-relative bottom-0 end-0">
                 <div class="text-end">
-                    <a href="{{ route('blog.like', $blog) }}"
+                    {{-- <a href="{{ route('blog.like', $blog) }}"
                         class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
-                            class="badge text-bg-secondary">{{ $blog->likes_count }}</span></a>
+                            class="badge text-bg-secondary">{{ $blog->likes_count }}</span></a> --}}
+                    <form class="d-inline" method="POST" action="{{ route('user.like.store') }}">
+                        @csrf
+                        <input type="hidden" name="blog_id" value="{{ $blog->id }}">
+                        <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
+                            Like <span class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
+                        </button>
+                    </form>
                     <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Comment <span
                             class="badge text-bg-secondary">{{ $blog->comments_count }}</span></a>
                     <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Share <span
@@ -147,9 +154,21 @@
                                         class="badge text-bg-secondary">4</span></a> --}}
                             </div>
                             <div class="col-6   text-end">
-                                <a href="{{ route('blogComment.like', $comment) }}"
+                                <form class="d-inline" method="POST" action="{{ route('user.like.store') }}">
+                                    @csrf
+                                    <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                    <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
+                                        @if (count($comment->likes) > 0)
+                                            Unlike
+                                        @else
+                                            Like
+                                        @endif <span
+                                            class="badge text-bg-secondary">{{ $comment->likes_count }}</span>
+                                    </button>
+                                </form>
+                                {{-- <a href="{{ route('blogComment.like', $comment) }}"
                                     class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
-                                        class="badge text-bg-secondary">{{ $comment->likes_count }}</span></a>
+                                        class="badge text-bg-secondary">{{ $comment->likes_count }}</span></a> --}}
                                 <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Reply</a>
                             </div>
                         </div>

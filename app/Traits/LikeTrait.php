@@ -30,11 +30,11 @@ trait LikeTrait
 
         // OR
         
-        $check = $model->likes()->where('user_id', auth()->id() ?? 1)->first();
+        $check = $model->likes()->where('user_id', auth()->id())->first();
         if (!empty($check)) {
-            return $model->likes()->where('user_id', auth()->id() ?? 1)->delete();
+            return $model->likes()->where('user_id', auth()->id())->delete();
         } else {
-            return $model->likes()->create(['user_id' => auth()->id() ?? 1]);
+            return $model->likes()->create(['user_id' => auth()->id()]);
         }
     }
 

@@ -61,9 +61,13 @@
 
                         <div class="card-footer bg-transparent border-0 position-absolute bottom-0 end-0">
                             <div class="text-end">
-                                <a href="{{ route('blog.like', $blog) }}"
-                                    class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
-                                        class="badge text-bg-secondary">{{ $blog->likes_count }}</span></a>
+                                <form class="d-inline" method="POST" action="{{ route('user.like.store') }}">
+                                    @csrf
+                                    <input type="hidden" name="blog_id" value="{{ $blog->id }}">
+                                    <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
+                                       @if(count($blog->likes) > 0)Unlike @else Like @endif  <span class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
+                                    </button>
+                                </form>
                                 <a href="{{ route('blog.show', $blog) }}"
                                     class="btn btn-sm btn-link text-dark text-decoration-none">Comment <span
                                         class="badge text-bg-secondary">{{ $blog->comments->count() }}</span></a>

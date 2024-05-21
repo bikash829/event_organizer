@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\LikeRequest;
 use App\Models\Blog; // Model Blog is imported
 use App\Traits\LikeTrait; // Like train imported
 
@@ -22,8 +23,16 @@ class BlogService
             'comments' => function ($query) {
                 $query->orderBy('created_at', 'desc')
                     ->withCount('likes')
-                    ->with('user:id,first_name,last_name,email');
-            }
+                    ->with([
+                        'user:id,first_name,last_name,email',
+                        'likes' => function ($query) {
+                            $query->where('user_id', auth()->id());
+                        },
+                    ]);
+            },
+            'likes' => function ($query) {
+                $query->where('user_id', auth()->id());
+            },
         ])
             ->withCount('likes', 'comments') // eager loading to count likes and comments those are modal functions
             ->orderBy('created_at', 'desc')
@@ -42,14 +51,23 @@ class BlogService
             'comments' => function ($query) {
                 $query->orderBy('created_at', 'desc')
                     ->withCount('likes')
-                    ->with('user:id,first_name,last_name,email');
-            }
+                    ->with([
+                        'user:id,first_name,last_name,email',
+                        'likes' => function ($query) {
+                            $query->where('user_id', auth()->id());
+                        },
+                    ]);
+
+            },
+            'likes' => function ($query) {
+                $query->where('user_id', auth()->id());
+            },
         ])
             ->withCount('likes', 'comments') // eager loading to count likes and comments those are modal functions
             ->orderBy('created_at', 'desc')
             ->where('user_id', auth()->id())
             ->paginate(10);
-
+        // dd($blogs->toArray());
         return $blogs;
     }
 
@@ -77,7 +95,12 @@ class BlogService
                 'comments' => function ($query) {
                     $query->orderBy('created_at', 'desc')
                         ->withCount('likes')
-                        ->with('user:id,first_name,last_name,email');
+                        ->with([
+                            'user:id,first_name,last_name,email',
+                            'likes' => function ($query) {
+                                $query->where('user_id', auth()->id());
+                            }
+                        ]);
                 },
             ]);
 
@@ -88,6 +111,7 @@ class BlogService
         //             $query->withCount('likes');
         //         }
         //     ]); // eager loading to count likes
+        
 
         return $blog;
     }
@@ -95,8 +119,9 @@ class BlogService
     /**
      * like blog 
      */
-    public function like($blog)
+    public function like($blog_id)
     {
+        $blog = Blog::findOrFail($blog_id);
         return $this->likable($blog);
     }
 
@@ -108,24 +133,5 @@ class BlogService
     {
         return $blog->update($request->validated());
     }
-
-    // public function getAll()
-    // {
-    //     $user_id = request('id');
-    //     // return Blog::whereDate('published_at', '>', now())->get();
-
-    //     // $blogs = Blog::latest()->paginate(10);
-    //     // dd($blogs);
-    //     $blogs = Blog::whereNull('published_at')->orWhereDate('published_at', '>=', now());
-    //     if ($user_id) {
-    //         $blogs = $blogs->where('user_id', $user_id);
-    //     }
-    //     return $blogs->orderBy('published_at', 'desc')->paginate(10);
-    //     // return $blogs;
-    // }
-
-
-
-
 
 }

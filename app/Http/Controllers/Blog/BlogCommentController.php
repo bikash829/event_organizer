@@ -68,11 +68,11 @@ class BlogCommentController extends Controller
     /**
      * Comment like 
      */
-    public function like(BlogComment $blogComment)
-    {
-        $this->blogCommentService->like($blogComment);
-        return back();
-    }
+    // public function like(BlogComment $blogComment)
+    // {
+    //     $this->blogCommentService->like($blogComment);
+    //     return back();
+    // }
 
     /**
      * Update the specified resource in storage.

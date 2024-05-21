@@ -26,13 +26,20 @@ class BlogCommentService
     /**
      * Like comment 
      */
-    public function like($blogComment)
-    {
-        // $this->blogService->like($blog);
-        // dd($blogComment);
-        $blogComment = $this->likable($blogComment);
-        return $blogComment;
+    // public function like($blogComment)
+    // {
+    //     // $this->blogService->like($blog);
+    //     // dd($blogComment);
+    //     $blogComment = $this->likable($blogComment);
+    //     return $blogComment;
 
+    // }
+
+    public function like($id)
+    {
+        $comment = BlogComment::findOrFail($id);
+        return $this->likable($comment);
     }
+    
 
 }

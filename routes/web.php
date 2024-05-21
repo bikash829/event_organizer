@@ -42,19 +42,21 @@ Route::resource('blog.comment', BlogCommentController::class);
 // Authenticated user can create blog
 Route::resource('blog', BlogController::class)->except(['index', 'show']);
 Route::middleware(['auth',])->prefix('user')->name('user.')->group(function () {
-    Route::resource('blog',UserBlogController::class);
+    Route::resource('blog', UserBlogController::class);
     Route::resource('blog.comment', BlogCommentController::class);
+    Route::resource('like', App\Http\Controllers\Blog\LikeController::class)->only(['store', 'destroy']);
 });
 
 
 
 
-// _____________Route for like and comment
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/blog-like/{blog}', [BlogController::class, 'like'])->name('blog.like');
-    Route::get('/comment-like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');
+// _____________Route for liking blog and comment
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::POST('/blog-like', [BlogController::class, 'like'])->name('blog.like');
+//     Route::get('/comment-like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');
 
-});
+
+// });
 
 
 
