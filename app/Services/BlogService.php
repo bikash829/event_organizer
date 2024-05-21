@@ -31,6 +31,27 @@ class BlogService
 
         return $blogs;
     }
+    /**
+     * get user blogs 
+     */
+    public function getUserBlogs()
+    {
+
+        $blogs = Blog::with([
+            'user:id,first_name,last_name,email',
+            'comments' => function ($query) {
+                $query->orderBy('created_at', 'desc')
+                    ->withCount('likes')
+                    ->with('user:id,first_name,last_name,email');
+            }
+        ])
+            ->withCount('likes', 'comments') // eager loading to count likes and comments those are modal functions
+            ->orderBy('created_at', 'desc')
+            ->where('user_id', auth()->id())
+            ->paginate(10);
+
+        return $blogs;
+    }
 
     /**
      * store blog
@@ -39,7 +60,7 @@ class BlogService
     {
         $data = $request->validated();
         // $data["user_id"] = $request->user_id ?? auth()->id();
-        $data["user_id"] = 1;
+        $data["user_id"] = auth()->id();
 
         return Blog::create($data);
 

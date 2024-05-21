@@ -11,6 +11,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('blog.index') }}">Blogs </a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('user.blog.index') }}">My Blogs</a>
                 <li class="breadcrumb-item active" aria-current="page">Create Blog
                     Post</li>
             </ol>
@@ -26,7 +27,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Create New Blog</h5>
-                <form action="{{route('blog.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('user.blog.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row g-2">
                         <x-forms.input type="text" placeholder="Title" name="title" />

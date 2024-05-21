@@ -9,7 +9,7 @@ use App\Http\Requests\UpdateBlogRequest; // Blog Update Request
 use App\Services\BlogService; // Blog Service
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session; // session flashback message
+// use Illuminate\Support\Facades\Session; // session flashback message
 
 class BlogController extends Controller
 {
@@ -37,7 +37,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('blogs.create');
+        // return view('blogs.create');
+        return "Not working yet.";
     }
 
     /**
@@ -45,13 +46,14 @@ class BlogController extends Controller
      */
     public function store(StoreBlogRequest $request)
     {
-        if ($this->blogService->store($request)) {
-            $request->session()->flash('success', 'Blog Created Successfully!');
-            return to_route('blog.index');
+        // if ($this->blogService->store($request)) {
+        //     $request->session()->flash('success', 'Blog Created Successfully!');
+        //     return to_route('blog.index');
 
-        } else {
-            abort(403, 'Technical Error Occured.');
-        }
+        // } else {
+        //     abort(403, 'Technical Error Occured.');
+        // }
+        return "Not working yet.";
     }
 
     /**
@@ -77,7 +79,8 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('blogs.edit', compact('blog'));
+        // return view('blogs.edit', compact('blog'));
+        return "Not working yet.";
     }
 
     /**
@@ -86,13 +89,14 @@ class BlogController extends Controller
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
 
-        if ($this->blogService->update($request, $blog)) {
-            $request->session()->flash('success', 'Blog Updated Successfully');
-        } else {
-            $request->session()->flash('success', 'Count not update blog. Please try again.');
-        }
+        // if ($this->blogService->update($request, $blog)) {
+        //     $request->session()->flash('success', 'Blog Updated Successfully');
+        // } else {
+        //     $request->session()->flash('success', 'Count not update blog. Please try again.');
+        // }
 
-        return to_route('blog.show', $blog);
+        // return to_route('blog.show', $blog);
+        return "Not working yet.";
     }
 
     /**
@@ -100,9 +104,10 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        $blog->delete();
-        Session::flash('success', 'Blog Updated Successfully');
-        return to_route('blog.index');
+        // $blog->delete();
+        // Session::flash('success', 'Blog Updated Successfully');
+        // return to_route('blog.index');
+        return "Not working yet.";
     }
 
 

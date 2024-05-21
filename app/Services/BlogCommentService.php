@@ -19,7 +19,7 @@ class BlogCommentService
      */
     public function store($request, $blog)
     {
-        $request['user_id'] = 1;
+        $request['user_id'] = auth()->id();
         return $blog->comments()->create($request->all());
     }
 

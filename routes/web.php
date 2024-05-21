@@ -6,7 +6,8 @@ use App\Http\Controllers\About\AboutController;
 // use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Service\ServiceController; // Service controller 
-use App\Http\Controllers\Blog\BlogController; // controller for blog
+use App\Http\Controllers\Blog\BlogController; // blog controller
+use App\Http\Controllers\Blog\UserBlogController; // blog controller
 use App\Http\Controllers\Blog\BlogCommentController; // blog comment controller 
 
 use App\Http\Controllers\ContactController; // contact us controller 
@@ -36,13 +37,24 @@ Route::resource('services', ServiceController::class);
 
 
 // ______________Route for blogs
-Route::resource('blog', BlogController::class);
-// ______________Route for blog comment
+Route::resource('blog', BlogController::class)->only(['index', 'show']);
 Route::resource('blog.comment', BlogCommentController::class);
+// Authenticated user can create blog
+Route::resource('blog', BlogController::class)->except(['index', 'show']);
+Route::middleware(['auth',])->prefix('user')->name('user.')->group(function () {
+    Route::resource('blog',UserBlogController::class);
+    Route::resource('blog.comment', BlogCommentController::class);
+});
+
+
+
 
 // _____________Route for like and comment
-Route::get('/blog-like/{blog}', [BlogController::class, 'like'])->name('blog.like');
-Route::get('/comment-like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/blog-like/{blog}', [BlogController::class, 'like'])->name('blog.like');
+    Route::get('/comment-like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');
+
+});
 
 
 
@@ -53,7 +65,7 @@ Route::get('/faq', function () {
 
 
 // Route for contact
-Route::resource('contact', ContactController::class);
+Route::resource('contact', ContactController::class)->only(['index', 'store']);
 
 
 

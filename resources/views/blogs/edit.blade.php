@@ -26,7 +26,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Edit Blog</h5>
-                <form method="POST" action="{{ route('blog.update', $blog) }}">
+                <form method="POST" action="{{ route('user.blog.update', $blog) }}">
                     @csrf
                     @method('PUT')
                     <div class="row g-2">

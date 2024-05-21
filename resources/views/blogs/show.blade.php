@@ -16,6 +16,11 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('blog.index') }}">Blogs</a></li>
+                {{-- {{ dd($blog) }} --}}
+                @if (auth()->id() == $blog->user_id)
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('user.blog.index') }}">My
+                            Blogs</a>
+                @endif
                 <li class="breadcrumb-item active" aria-current="page">Blog</li>
             </ol>
         </nav>
@@ -49,23 +54,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2 my-auto">
-                        <div class="row g-2">
-                            {{-- <div class="d-grid text-end">
+                    @if (auth()->id() == $blog->user_id)
+                        <div class="col-2 my-auto">
+                            <div class="row g-2">
+                                {{-- <div class="d-grid text-end">
                                 <a href="{{ route('blog.edit', $blog) }}" class="btn btn-outline-primary">Edit</a>
                             </div> --}}
-                            <form action="{{ route('blog.edit', $blog) }}" class="d-grid text-end">
-                                @csrf
-                                @method('GET')
-                                <button type="submit" class="btn btn-outline-primary">Edit</button>
-                            </form>
-                            <form class="d-grid  text-end" method="POST" action="{{ route('blog.destroy', $blog) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger">Delete</button>
-                            </form>
+                                <form action="{{ route('user.blog.edit', $blog) }}" class="d-grid text-end">
+                                    @csrf
+                                    @method('GET')
+                                    <button type="submit" class="btn btn-outline-primary">Edit</button>
+                                </form>
+                                <form class="d-grid  text-end" method="POST"
+                                    action="{{ route('user.blog.destroy', $blog) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
 
@@ -98,7 +106,7 @@
 
                     <div class="comment__form">
                         <form method="POST" enctype="multipart/form-data"
-                            action="{{ route('blog.comment.store', $blog) }}">
+                            action="{{ route('user.blog.comment.store', $blog) }}">
                             @csrf
                             @method('POST')
                             <div class="row g-2">
