@@ -5,12 +5,11 @@ namespace App\Services;
 use App\Http\Requests\LikeRequest;
 use App\Models\Blog; // Model Blog is imported
 use App\Traits\LikeTrait; // Like train imported
-
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class BlogService
 {
     use LikeTrait;
-
 
     /**
      * Getting all blogs 
@@ -92,12 +91,12 @@ class BlogService
         $blog->loadCount(['likes', 'comments'])
             ->load([
                 'user:id,first_name,last_name,email',
-                'comments' => function ($query) {
+                'comments' => function (Builder $query) {
                     $query->orderBy('created_at', 'desc')
                         ->withCount('likes')
                         ->with([
                             'user:id,first_name,last_name,email',
-                            'likes' => function ($query) {
+                            'likes' => function (Builder $query) {
                                 $query->where('user_id', auth()->id());
                             }
                         ]);
@@ -111,8 +110,8 @@ class BlogService
         //             $query->withCount('likes');
         //         }
         //     ]); // eager loading to count likes
-        
 
+        // dd($blog->toArray());
         return $blog;
     }
 

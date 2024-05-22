@@ -45,4 +45,7 @@
     max-width: 100px;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
 /* Path: public/css/blogs/blog.css */

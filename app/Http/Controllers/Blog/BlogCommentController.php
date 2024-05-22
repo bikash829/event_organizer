@@ -8,8 +8,8 @@ use App\Http\Requests\StoreBlogCommentRequest; // custom comment store request
 use App\Http\Requests\UpdateBlogCommentRequest; // custom comment update request
 use App\Services\BlogCommentService; // Service class
 use App\Models\Blog; // Blog Model
-
-
+// use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\Session; // session flashback message
 
 class BlogCommentController extends Controller
 {
@@ -60,9 +60,9 @@ class BlogCommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BlogComment $blogComment)
+    public function edit(Blog $blog, BlogComment $comment)
     {
-        return "comment edit";
+        return view('blogs.comment.edit', compact('blog', 'comment'));
     }
 
     /**
@@ -77,17 +77,24 @@ class BlogCommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBlogCommentRequest $request, BlogComment $blogComment)
+    public function update(UpdateBlogCommentRequest $request, Blog $blog, BlogComment $comment)
     {
-        return "comment update";
+        $comment->update($request->validated());
+
+        return to_route('blog.show', compact('blog'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BlogComment $blogComment)
+    public function destroy(Blog $blog, BlogComment $comment)
     {
-        return "comment destroy";
+        if (auth()->id() != $comment->user_id) {
+            abort(403, 'Unauthorized Access request');
+        }
+        $comment->delete();
+        Session::flash('success', 'Comment Deleted');
+        return to_route('blog.show', compact('blog'));
     }
 
 

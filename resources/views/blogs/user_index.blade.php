@@ -65,7 +65,7 @@
                                     @csrf
                                     <input type="hidden" name="blog_id" value="{{ $blog->id }}">
                                     <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
-                                       @if(count($blog->likes) > 0)Unlike @else Like @endif  <span class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
+                                       @if(count($blog->likes) > 0)<span class="text-info">Unlike</span> @else <span class="text-info">Like</span> @endif  <span class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
                                     </button>
                                 </form>
                                 <a href="{{ route('blog.show', $blog) }}"
