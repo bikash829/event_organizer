@@ -135,22 +135,23 @@
                         <div class="comments__info card-title ">
                             <div class="row">
                                 <div class="comments__user col-8"><strong>{{ fullName($comment->user) }}</strong> </div>
-                                {{-- <div class="comments__user col-8 "><strong>{{ fullName($comment->user) }}</strong> </div> --}}
-                                <div class="comments__settings col-4 text-end">
+                                @if (auth()->id() == $blog->user_id)
+                                    <div class="comments__settings col-4 text-end">
 
-                                    <a class="pe-2 comment-edit btn  btn-sm btn-outline-primary "
-                                        href="{{ route('user.blog.comment.edit', [$blog, $comment]) }}">Edit</a>
+                                        <a class="pe-2 comment-edit btn  btn-sm btn-outline-primary "
+                                            href="{{ route('user.blog.comment.edit', [$blog, $comment]) }}">Edit</a>
 
-                                    <form method="POST"
-                                        action="{{ route('user.blog.comment.destroy', [$blog, $comment]) }}"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger">
-                                    </form>
-                                    {{-- <a class="text-danger comment-delete"
+                                        <form method="POST"
+                                            action="{{ route('user.blog.comment.destroy', [$blog, $comment]) }}"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger">
+                                        </form>
+                                        {{-- <a class="text-danger comment-delete"
                                         href="{{ route('user.blog.comment.destroy', [$blog, $comment]) }}">Delete</a> --}}
-                                </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <p class="comment-description">{{ $comment->comment }}</p>
