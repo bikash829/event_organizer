@@ -33,4 +33,21 @@ class BlogComment extends Model
         return $this->morphMany(Like::class, 'likeable');  // with likable column to likes migration table
     }
 
+
+    /**
+     * Get all of the comment's replies.
+     */
+    public function replies()
+    {
+        return $this->hasMany(BlogComment::class, 'parent_id');
+    }
+
+    /**
+     * Get the parent comment.
+     */
+    public function parent()
+    {
+        return $this->belongsTo(BlogComment::class, 'parent_id');
+    }
+
 }

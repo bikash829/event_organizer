@@ -11,13 +11,14 @@ class commentForm extends Component
     /**
      * Create a new component instance.
      */
+  
+    
     public function __construct(
         public object $blog,
         public string $commentId = "",
-        // public string $authId = "",
-    )
-    {
-        //
+        public string $formId = '',
+    ) {
+        
     }
 
     /**

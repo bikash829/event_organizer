@@ -39,7 +39,7 @@
         <!-- Comment Section -->
         <div class="comment-container">
             <!--comment form -->
-            <x-blog.comment-form :blog="$blog" />
+            <x-blog.comment-form :blog="$blog" formId="{{ $blog->id }}_blog" />
 
 
             @foreach ($blog->comments as $comment)
@@ -49,9 +49,16 @@
                     <div class="replies">
                         <p class="m-0 pt-3 px-3 text-muted">Replies</p>
                         <hr />
-                        <x-blog.comment-form :blog="$blog" commentId="{{ $comment->id }}" />
-                        <x-blog.comment :blog="$blog" :comment="$comment" authId="{{ auth()->id() }}" />
+                       
+                        <x-blog.comment-form :blog="$blog" commentId="{{ $comment->id }}"
+                            formId="{{ $comment->id }}_comment" />
+                        @foreach ($comment->replies as $comment)
+                            <x-blog.comment :blog="$blog" :comment="$comment" :isReply="true"
+                                authId="{{ auth()->id() }}" />
+                        @endforeach
+
                     </div>
+                    <!--./ Replies -->
                 </div>
             @endforeach
         </div>
@@ -73,8 +80,13 @@
             $('.replies').hide();
 
 
-            $('.btnReply').click(function(e) {
+            $('.btnReplies').click(function(e) {
                 $(e.target).closest('.commentSection').find('.replies').toggle();
+            });
+
+            $('.btnReply').click(function(e) {
+                window.location.href =
+                    `#${$(e.target).closest('.commentSection').find('.form-comment').attr('id')}`;
             });
 
             // comment interation

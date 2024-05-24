@@ -15,8 +15,9 @@ class comment extends Component
         public object $comment,
         public object $blog,
         public string $authId = "",
-    )
-    {
+        public bool $isReply = false,
+        
+    ) {
         //
     }
 

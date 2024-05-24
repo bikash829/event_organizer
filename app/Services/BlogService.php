@@ -93,12 +93,22 @@ class BlogService
                 'user:id,first_name,last_name,email',
                 'comments' => function (Builder $query) {
                     $query->orderBy('created_at', 'desc')
-                        ->withCount('likes')
+                        ->withCount(['likes', 'replies'])
                         ->with([
                             'user:id,first_name,last_name,email',
                             'likes' => function (Builder $query) {
                                 $query->where('user_id', auth()->id());
-                            }
+                            },
+                            'replies' => function (Builder $query) {
+                                $query->orderBy('created_at', 'desc')
+                                    ->withCount('likes')
+                                    ->with([
+                                        'user:id,first_name,last_name,email',
+                                        'likes' => function (Builder $query) {
+                                            $query->where('user_id', auth()->id());
+                                        },
+                                    ]);
+                            },
                         ]);
                 },
             ]);
@@ -111,7 +121,7 @@ class BlogService
         //         }
         //     ]); // eager loading to count likes
 
-        // dd($blog->toArray());
+  
         return $blog;
     }
 

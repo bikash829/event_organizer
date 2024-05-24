@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
 
 
         // ______________create factory data for BlogFactory
-        Blog::factory(5)->create();
+        Blog::factory(15)->create();
 
         // ______________create factory data for BlogCommentFactory
         BlogComment::factory(30)->create();

@@ -60,10 +60,17 @@
                     </button>
                 </form>
 
-                <button class="btn btn-sm btn-link text-dark text-decoration-none btnReply">
-                    Replies
-                    <span class="badge text-bg-secondary">{{ 0 }}</span>
-                </button>
+
+
+                @if ($isReply)
+                    <a class="btn btn-sm btn-link text-dark text-decoration-none btnReply">
+                        Reply
+                    </a>
+                @else
+                    <button class="btn btn-sm btn-link text-dark text-decoration-none btnReplies">
+                        Replies</button>
+                @endif
+                <span class="badge text-bg-secondary">{{ $comment->replies_count }}</span>
             </div>
         </div>
     </div>
