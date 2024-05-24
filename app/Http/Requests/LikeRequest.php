@@ -2,19 +2,16 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Database\Eloquent\Relations\HasMany; // HasMany added
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Blog; // Blog added
-use App\Models\BlogComment; // BlogComment added
 
-class User extends FormRequest
+class LikeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,19 +22,8 @@ class User extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'blog_id' => 'required_without:comment_id|exists:blogs,id',
+            'comment_id' => 'required_without:blog_id|exists:blog_comments,id',
         ];
     }
-
-
-    public function blogs(): HasMany
-    {
-        return $this->hasMany(Blog::class);
-    }
-
-    public function comments(): HasMany
-    {
-        return $this->hasMany(BlogComment::class);
-    }
-
 }

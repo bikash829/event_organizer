@@ -11,8 +11,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 {{-- <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('blog.show', $blog) }}">Blog </a></li> --}}
-                <li class="breadcrumb-item active" aria-current="page">Edit Blog
-                    Post</li>
+                <li class="breadcrumb-item active" aria-current="page">Edit Comment</li>
             </ol>
         </nav>
     </div>
@@ -25,19 +24,22 @@
     <div class="card-container">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Edit Blog</h5>
-                <form method="POST" action="{{ route('user.blog.update', $blog) }}">
+                <h5 class="card-title">Edit Comment</h5>
+                <form method="POST" action="{{ route('user.blog.comment.update', [$blog, $comment]) }}">
                     @csrf
                     @method('PUT')
                     <div class="row g-2">
-                        <x-forms.input type="text" placeholder="Title" value="{{ $blog->title }}" name="title" />
-                        <x-forms.input type="textarea" value="{{ $blog->content }}" placeholder="Write your blog here"
-                            rows="8" name="content" />
-                        {{-- <x-forms.input type="file" placeholder="Upload Image" name="image" /> --}}
-                        <div class="col-12 text-end">
-                            <a href="{{ route('blog.show', $blog) }}" class="btn btn-danger">Cancel</a>
-                            <input type="submit" value="Update" class="btn btn-secondary">
+                        @csrf
+                        @method('PUT')
+                        <div class="row g-2">
+                            <x-forms.input name="comment" value="{{ $comment->comment }}" type="textarea" required />
+                            <div class="text-end">
+                                <a href="{{ route('blog.show', $blog) }}"
+                                    class="comment-cancel-update btn btn-sm btn-danger">Cancel</a>
+                                <button type="submit" class="comment-update btn btn-sm btn-info">Update</button>
+                            </div>
                         </div>
+
                     </div>
 
                 </form>

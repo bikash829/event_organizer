@@ -3,13 +3,18 @@
 namespace Database\Seeders;
 
 
-use App\Models\User;
-use App\Models\ServiceCategory;
+use App\Models\User; // User Model
+use App\Models\ServiceCategory; // ServiceCategory Model
+use App\Models\Blog; // Blog Model
+use App\Models\BlogComment; // BlogComment Model
+use App\Models\Like; // Like Model
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -39,8 +44,8 @@ class DatabaseSeeder extends Seeder
                 'name' => $permission
             ]);
         }
-        // User::factory(10)->create();
 
+        // User::factory(10)->create();
         $users = [
             ['first_name' => 'Test User', 'email' => 'test@example.com', 'role' => 'user'],
             ['first_name' => 'Admin', 'email' => 'admin@example.com', 'password' => Hash::make('password'), 'role' => 'admin'],
@@ -56,10 +61,8 @@ class DatabaseSeeder extends Seeder
             $user->assignRole($role);
         }
 
-        // $table->string('category_name', 100);
-        //     $table->text('description');
-        //     $table->timestamps();
-        //make seeder for these service categories
+
+        // ______________create factory data for ServiceCategoryFactory
         $serviceCategories = [
             ['category_name' => 'Music', 'description' => 'Cleaning service'],
             ['category_name' => 'Decoration', 'description' => 'Plumbing service'],
@@ -74,5 +77,15 @@ class DatabaseSeeder extends Seeder
             ServiceCategory::create($serviceCategory);
         }
 
+
+
+        // ______________create factory data for BlogFactory
+        Blog::factory(15)->create();
+
+        // ______________create factory data for BlogCommentFactory
+        BlogComment::factory(30)->create();
+
+        // ______________create factory data for LikeFactory
+        Like::factory(200)->create();
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use Illuminate\Database\Eloquent\Relations\HasMany; // Relationship added
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -68,4 +68,28 @@ class User extends Authenticatable implements MustVerifyEmail
     // {
     //     return $value ? 'yes' : 'no';
     // }
+
+
+    /**
+     * Has many relationship with Blog
+     */
+    public function blogs(): HasMany
+    {
+        return $this->hasMany(Blog::class);
+    }
+    /**
+     * Has many relationship with BlogComment   
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(BlogComment::class);
+    }
+
+    /**
+     * Has many relationship with Like
+     */
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class);
+    }
 }

@@ -10,8 +10,8 @@
     <div class="container mt-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Blogs </li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('user.blog.index') }}">My Blogs</a>
+                <li class="breadcrumb-item active" aria-current="page"> <a href="{{ route('blog.index') }}">Blogs</a> </li>
+                <li class="breadcrumb-item active" aria-current="page">My Blogs</li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('user.blog.create') }}">Create Blog
                         Post</a></li>
             </ol>
@@ -140,6 +140,7 @@
         @endforeach
     </div>
     <!--./ existed blogs card-container -->
+
     <div class="py-2 d-flex justify-content-center">
         {{ $blogs->links() }}
     </div>

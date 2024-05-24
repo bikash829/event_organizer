@@ -2,19 +2,16 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Database\Eloquent\Relations\HasMany; // HasMany added
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Blog; // Blog added
-use App\Models\BlogComment; // BlogComment added
 
-class User extends FormRequest
+class UpdateBlogRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,19 +22,10 @@ class User extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'content' => 'required',
+            'published_at' => 'sometimes|required|date',
+            'user_id' => 'sometimes|required|exists:users,id',
         ];
     }
-
-
-    public function blogs(): HasMany
-    {
-        return $this->hasMany(Blog::class);
-    }
-
-    public function comments(): HasMany
-    {
-        return $this->hasMany(BlogComment::class);
-    }
-
 }

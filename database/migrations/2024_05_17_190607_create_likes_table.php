@@ -10,12 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('blog_comments', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->text('comment');
-            $table->foreignId('blog_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('parent_id')->nullable()->constrained('blog_comments')->onDelete('cascade');
+            $table->morphs('likeable'); // morphs relationship
+            // $table->unsignedBigInteger('likeable_id');
+            // $table->string('likeable_type');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('blog_comments');
+        Schema::dropIfExists('likes');
     }
 };

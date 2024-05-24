@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('header')
     <!-- Carousel -->
@@ -10,4 +10,4 @@
 
 @section('content')
     <h1>Here you are inside blog page.</h1>
-@endsection
+@endsection --}}

@@ -27,7 +27,7 @@
                     <form action="{{ route('contact.store') }}" method="POST">
                         @csrf
                         <div class="row g-3">
-                            <x-forms.input label="Full Name" name="name" value="{{ old('name') }}" :isRequired="true" />
+                            <x-forms.input label="Full Name" name="name" value="{{ old('name') }}" :isRequired="false" />
                             <x-forms.input label="Email" colSize="col-md-6 col-12" name="email" type="email"
                                 value="{{ old('email') }}" :isRequired="true" />
                             <x-forms.input label="Phone" colSize="col-md-6 col-12" class="col-12 col-md-6" maxLength="11"
