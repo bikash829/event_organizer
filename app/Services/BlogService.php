@@ -109,7 +109,9 @@ class BlogService
                                         },
                                     ]);
                             },
-                        ]);
+
+                        ])
+                        ->whereNull('parent_id');   
                 },
             ]);
 

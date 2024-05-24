@@ -5,11 +5,12 @@
             <div class="row">
                 <div class="comments__user col-8"><strong>{{ fullName($comment->user) }}</strong>
                 </div>
-                @if ($authId == $blog->user_id)
+                @if ($authId == $blog->user_id || $authId == $comment->user_id)
                     <div class="comments__settings col-4 text-end">
 
                         <a class="pe-2 comment-edit btn  btn-sm btn-outline-primary "
                             href="{{ route('user.blog.comment.edit', [$blog, $comment]) }}">Edit</a>
+
 
                         <form method="POST" action="{{ route('user.blog.comment.destroy', [$blog, $comment]) }}"
                             class="d-inline">
@@ -20,24 +21,12 @@
                         {{-- <a class="text-danger comment-delete"
                             href="{{ route('user.blog.comment.destroy', [$blog, $comment]) }}">Delete</a> --}}
                     </div>
+                
                 @endif
             </div>
         </div>
         <p class="comment-description">{{ $comment->comment }}</p>
-        <!-- Comment update form -->
-        {{-- <form method="POST" action="{{ route('user.blog.comment.update', [$blog, $comment]) }}"
-                class="frm-comment-update">
-                @csrf
-                @method('PUT')
-                <div class="row g-2">
-                    <x-forms.input name="comment" value="{{ $comment->comment }}" type="textarea" required />
-                    <div class="text-end">
-                        <button type="button" id="comment_{{ $comment->id }}"
-                            class="comment-cancel-update btn btn-sm btn-danger">Cancel</button>
-                        <button type="submit" class="comment-update btn btn-sm btn-info">Update</button>
-                    </div>
-                </div>
-            </form> --}}
+
     </div>
     <div class="card-footer bg-transparent border-0">
         <div class="row">

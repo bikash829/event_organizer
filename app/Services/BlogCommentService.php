@@ -20,6 +20,7 @@ class BlogCommentService
     public function store($request, $blog)
     {
         $request['user_id'] = auth()->id();
+        
         return $blog->comments()->create($request->all());
     }
 
@@ -40,6 +41,6 @@ class BlogCommentService
         $comment = BlogComment::findOrFail($id);
         return $this->likable($comment);
     }
-    
+
 
 }

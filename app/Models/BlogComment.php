@@ -14,7 +14,7 @@ class BlogComment extends Model
     use HasFactory;
 
 
-    protected $fillable = ['comment', 'user_id', 'blog_id'];
+    protected $fillable = ['comment', 'user_id', 'blog_id', 'parent_id'];
 
 
     public function user()
