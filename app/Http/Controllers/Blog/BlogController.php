@@ -64,7 +64,8 @@ class BlogController extends Controller
     public function show(Blog $blog)
     {
         $blog = $this->blogService->show($blog);
-        return view('blogs.show', compact('blog'));
+        // return view('blogs.show', compact('blog'));
+        return view('blogs.test', compact('blog'));
     }
 
     /**

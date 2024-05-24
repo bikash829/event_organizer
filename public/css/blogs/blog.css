@@ -1,13 +1,14 @@
 /**
 * Index blog 
 */
-.card-container {
+.blog-card-container {
     margin-top: 20px;
     border-radius: 6px;
+    /* border: 1px solid #ccc; */
     border: 1px solid #ccc;
 }
 
-.card {
+.blog-card-container .card {
     border: none !important;
     border-bottom: 1px solid #ccc !important;
 }
@@ -17,6 +18,17 @@
     line-height: 1.5;
 }
 
+.replies {
+    border-left: 1px solid #ccc;
+    border-radius: 0 0 0 6px;
+    max-width: 98%;
+    margin-left: 2%;
+}
+
+.replies .card .card-body {
+    /* padding-top: 0 !important; */
+    padding-bottom: 0 !important;
+}
 .comments__info {
     /* background-color: #ccc */
 }
@@ -49,3 +61,22 @@
     cursor: pointer;
 }
 /* Path: public/css/blogs/blog.css */
+
+/**
+* replies
+*/
+.replies-container {
+    width: 99%;
+    /* border-style: 0 1px 1px 1px; */
+    /* border-right: 1px solid #ccc; */
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-radius: 0 0 6px 6px;
+    margin: 0 0 0 auto;
+    padding: 10px;
+}
+.replies-content {
+    border-bottom: 1px solid #ccc;
+}
+.reply-card {
+}
