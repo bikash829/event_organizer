@@ -75,12 +75,16 @@
                                         @csrf
                                         <input type="hidden" name="blog_id" value="{{ $blog->id }}">
                                         <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
-                                            @if ($blog->authLiked)
+
+                                            {{-- @if ($blog->authLiked)
                                                 <span class="text-info">Unlike</span>
                                             @else
                                                 <span class="text-info">Like</span>
-                                            @endif <span
-                                                class="badge text-bg-secondary">{{ $blog->likes_count }}</span> <!-- check if the blog has likes from auth user -->
+                                            @endif  --}}
+                                            <span class="text-info">{{ $blog->authLiked ? 'Unlike' : 'Like' }}</span>
+
+                                            <span class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
+                                            <!-- check if the blog has likes from auth user -->
                                         </button>
                                     </form>
                                     <a href="{{ route('blog.show', $blog) }}"

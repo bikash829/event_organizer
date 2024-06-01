@@ -35,8 +35,6 @@
         <x-blog.post :blog="$blog" authId="{{ auth()->id() }}"
             blogImgUrl="{{ $blog->getFirstMediaUrl() ?? $blog->image }}"
             blogImgAlt="{{ $blog->getFirstMedia()->name ?? 'Fake Image' }}" />
-
-
         <!--./ Blog Card -->
 
         <!-- Comment Section -->

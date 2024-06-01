@@ -31,7 +31,6 @@
                     <div class="row g-0">
                         <div class="col-md-4">
                             @if ($blog->getFirstMediaUrl() !== '')
-                                
                                 <img src="{{ $blog->getFirstMediaUrl() }}" class="img-fluid rounded-start"
                                     alt="{{ $blog->getFirstMedia()->name }}" />
                             @else
@@ -72,12 +71,10 @@
                                         @csrf
                                         <input type="hidden" name="blog_id" value="{{ $blog->id }}">
                                         <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
-                                            @if ($blog->authLiked) <!-- check if the blog has likes from auth user -->
-                                                <span class="text-info">Unlike</span>
-                                            @else
-                                                <span class="text-info">Like</span>
-                                            @endif <span
-                                                class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
+
+
+                                            <span class="text-info">{{ $blog->authLiked ? 'Unlike' : 'Like' }}</span>
+                                            <span class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
                                         </button>
                                     </form>
                                     <a href="{{ route('blog.show', $blog) }}"
