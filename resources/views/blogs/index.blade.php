@@ -30,16 +30,16 @@
                 <div class="card">
                     <div class="row g-0">
                         <div class="col-md-4">
-
                             @if ($blog->getFirstMediaUrl() !== '')
                                 <img src="{{ $blog->getFirstMediaUrl() }}" class="img-fluid rounded-start"
                                     alt="{{ $blog->getFirstMedia()->name }}" />
+                            @elseif($blog->image !== NULL)
+                                <img src="{{ $blog->image }}" class="img-fluid rounded-start" alt="Fake Image" />   
                             @else
-                                <img src="{{ $blog->image }}" class="img-fluid rounded-start" alt="Fake Image" />
+                                <div class="col-12 bg-secondary rounded-start d-flex align-items-center justify-content-center " style="height: 100%;">
+                                    <p class="text-center text-white fs-4">No Image</p>
+                                </div>
                             @endif
-
-
-
                         </div>
                         <div class="col-md-8 position-relative">
 

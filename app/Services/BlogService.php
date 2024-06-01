@@ -72,8 +72,10 @@ class BlogService
         // $data["user_id"] = $request->user_id ?? auth()->id();
         $data["user_id"] = auth()->id();
         $blog = Blog::create($data);
-        $blog->addMedia($data['image'])
+        if(isset($data['image'])){
+            $blog->addMedia($data['image'])
             ->toMediaCollection();
+        }
         return $blog;
     }
 
@@ -153,6 +155,12 @@ class BlogService
      */
     public function update($request, $blog)
     {
+        $blog->clearMediaCollection();
+        
+        if(isset($request->image)){
+            $blog->addMedia($request->image)
+            ->toMediaCollection();
+        }
         return $blog->update($request->validated());
     }
 
