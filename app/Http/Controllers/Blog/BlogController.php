@@ -65,19 +65,7 @@ class BlogController extends Controller
     {
         $blog = $this->blogService->show($blog);
         // return view('blogs.show', compact('blog'));
-        return view('blogs.test', compact('blog'));
-    }
-
-    /**
-     * Like the specified resource.
-     */
-    public function like(LikeRequest $request)
-    {
-        // dd($request->blog_id);
-        dd($request->type);
-        $this->blogService->like($request->blog_id);
-
-        return back();
+        return view('blogs.show', compact('blog'));
     }
 
     /**

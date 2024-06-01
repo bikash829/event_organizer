@@ -30,8 +30,16 @@
                 <div class="card">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="{{ asset('assets/images/slider/slider2.jpg') }}" class="img-fluid rounded-start"
-                                alt="...">
+                            @if ($blog->getFirstMediaUrl() !== '')
+                                <img src="{{ $blog->getFirstMediaUrl() }}" class="img-fluid rounded-start"
+                                    alt="{{ $blog->getFirstMedia()->name }}" />
+                            @elseif($blog->image !== NULL)
+                                <img src="{{ $blog->image }}" class="img-fluid rounded-start" alt="Fake Image" />   
+                            @else
+                                <div class="col-12 bg-secondary rounded-start d-flex align-items-center justify-content-center " style="height: 100%;">
+                                    <p class="text-center text-white fs-4">No Image</p>
+                                </div>
+                            @endif
                         </div>
                         <div class="col-md-8 position-relative">
 
@@ -67,12 +75,10 @@
                                         @csrf
                                         <input type="hidden" name="blog_id" value="{{ $blog->id }}">
                                         <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
-                                            @if (count($blog->likes) > 0)
-                                                <span class="text-info">Unlike</span>
-                                            @else
-                                                <span class="text-info">Like</span>
-                                            @endif <span
-                                                class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
+
+
+                                            <span class="text-info">{{ $blog->authLiked ? 'Unlike' : 'Like' }}</span>
+                                            <span class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
                                         </button>
                                     </form>
                                     <a href="{{ route('blog.show', $blog) }}"

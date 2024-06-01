@@ -32,7 +32,7 @@ class BlogComment extends Model
         // return $this->hasMany(Like::class, 'likeable_id')->where('likeable_type', Blog::class);
         return $this->morphMany(Like::class, 'likeable');  // with likable column to likes migration table
     }
-
+    
 
     /**
      * Get all of the comment's replies.

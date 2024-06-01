@@ -19,24 +19,21 @@ class BlogService
 
         $blogs = Blog::with([
             'user:id,first_name,last_name,email',
-            'comments' => function ($query) {
-                $query->orderBy('created_at', 'desc')
-                    ->withCount('likes')
-                    ->with([
-                        'user:id,first_name,last_name,email',
-                        'likes' => function ($query) {
-                            $query->where('user_id', auth()->id());
-                        },
-                    ]);
+            'comments' => function (Builder $query) {
+                $query->orderBy('created_at', 'desc');
             },
-            'likes' => function ($query) {
-                $query->where('user_id', auth()->id());
-            },
+
         ])
-            ->withCount('likes', 'comments') // eager loading to count likes and comments those are modal functions
+            ->withCount([
+                'likes',
+                'comments',
+                'likes as authLiked' => function ($query) {
+                    $query->where('user_id', auth()->id());
+                }
+            ]) // eager loading to count likes and comments those are modal functions
+
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-
         return $blogs;
     }
     /**
@@ -48,21 +45,17 @@ class BlogService
         $blogs = Blog::with([
             'user:id,first_name,last_name,email',
             'comments' => function ($query) {
-                $query->orderBy('created_at', 'desc')
-                    ->withCount('likes')
-                    ->with([
-                        'user:id,first_name,last_name,email',
-                        'likes' => function ($query) {
-                            $query->where('user_id', auth()->id());
-                        },
-                    ]);
+                $query->orderBy('created_at', 'desc');
+            },
 
-            },
-            'likes' => function ($query) {
-                $query->where('user_id', auth()->id());
-            },
         ])
-            ->withCount('likes', 'comments') // eager loading to count likes and comments those are modal functions
+            ->withCount([
+                'likes',
+                'comments',
+                'likes as authLiked' => function ($query) {
+                    $query->where('user_id', auth()->id());
+                },
+            ]) // eager loading to count likes and comments those are modal functions
             ->orderBy('created_at', 'desc')
             ->where('user_id', auth()->id())
             ->paginate(10);
@@ -78,9 +71,12 @@ class BlogService
         $data = $request->validated();
         // $data["user_id"] = $request->user_id ?? auth()->id();
         $data["user_id"] = auth()->id();
-
-        return Blog::create($data);
-
+        $blog = Blog::create($data);
+        if(isset($data['image'])){
+            $blog->addMedia($data['image'])
+            ->toMediaCollection();
+        }
+        return $blog;
     }
 
     /**
@@ -88,32 +84,48 @@ class BlogService
      */
     public function show($blog)
     {
-        $blog->loadCount(['likes', 'comments'])
-            ->load([
-                'user:id,first_name,last_name,email',
-                'comments' => function (Builder $query) {
-                    $query->orderBy('created_at', 'desc')
-                        ->withCount(['likes', 'replies'])
-                        ->with([
-                            'user:id,first_name,last_name,email',
-                            'likes' => function (Builder $query) {
-                                $query->where('user_id', auth()->id());
-                            },
-                            'replies' => function (Builder $query) {
-                                $query->orderBy('created_at', 'desc')
-                                    ->withCount('likes')
-                                    ->with([
-                                        'user:id,first_name,last_name,email',
-                                        'likes' => function (Builder $query) {
-                                            $query->where('user_id', auth()->id());
-                                        },
-                                    ]);
-                            },
+        $blog->load([
+            'user:id,first_name,last_name,email',
+            'comments' => function (Builder $query) {
+                $query->orderBy('created_at', 'desc')
+                    ->with([
+                        'user:id,first_name,last_name,email',
+                        'replies' => function (Builder $query) {
+                            $query->orderBy('created_at', 'desc')
+                                ->with([
+                                    'user:id,first_name,last_name,email',
+                                ])
+                                ->withCount([
+                                    'likes',
+                                    'likes as authLiked' => function (Builder $query) {
+                                        $query->where('user_id', auth()->id());
+                                    },
+                                ]);
+                        },
+                    ])
+                    ->withCount([
+                        'likes',
+                        'replies',
+                        'likes as authLiked' => function ($query) {
+                            $query->where('user_id', auth()->id());
+                        }
+                    ])
 
-                        ])
-                        ->whereNull('parent_id');   
-                },
-            ]);
+                    ->whereNull('parent_id');
+            },
+        ])
+            ->loadCount([
+                'likes',
+                'comments',
+                'likes as authLiked' => function ($query) {
+                    $query->where('user_id', auth()->id());
+                }
+            ])
+
+        ;
+
+
+        // dd($blog->toArray());
 
         // $blog->loadCount(['likes','comments.likes']);
         // $blog->loadCount(['likes', 'comments'])
@@ -123,7 +135,7 @@ class BlogService
         //         }
         //     ]); // eager loading to count likes
 
-  
+
         return $blog;
     }
 
@@ -133,6 +145,7 @@ class BlogService
     public function like($blog_id)
     {
         $blog = Blog::findOrFail($blog_id);
+
         return $this->likable($blog);
     }
 
@@ -142,6 +155,12 @@ class BlogService
      */
     public function update($request, $blog)
     {
+        $blog->clearMediaCollection();
+        
+        if(isset($request->image)){
+            $blog->addMedia($request->image)
+            ->toMediaCollection();
+        }
         return $blog->update($request->validated());
     }
 

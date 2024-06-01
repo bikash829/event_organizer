@@ -29,8 +29,9 @@ trait LikeTrait
         // $blog->likes()->create(['user_id' => 1]);
 
         // OR
-        
+
         $check = $model->likes()->where('user_id', auth()->id())->first();
+
         if (!empty($check)) {
             return $model->likes()->where('user_id', auth()->id())->delete();
         } else {

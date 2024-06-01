@@ -26,14 +26,16 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Edit Blog</h5>
-                <form method="POST" action="{{ route('user.blog.update', $blog) }}">
+                <form method="POST" action="{{ route('user.blog.update', $blog) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row g-2">
                         <x-forms.input type="text" placeholder="Title" value="{{ $blog->title }}" name="title" />
                         <x-forms.input type="textarea" value="{{ $blog->content }}" placeholder="Write your blog here"
                             rows="8" name="content" />
-                        {{-- <x-forms.input type="file" placeholder="Upload Image" name="image" /> --}}
+                        {{-- <x-forms.input type="file" value="{{ $blog->content }}" placeholder="change Image" name="image" /> --}}
+                   
+                        <x-forms.input type="file" placeholder="Upload Image" name="image" />
                         <div class="col-12 text-end">
                             <a href="{{ route('blog.show', $blog) }}" class="btn btn-danger">Cancel</a>
                             <input type="submit" value="Update" class="btn btn-secondary">

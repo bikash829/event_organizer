@@ -21,13 +21,13 @@
                         {{-- <a class="text-danger comment-delete"
                             href="{{ route('user.blog.comment.destroy', [$blog, $comment]) }}">Delete</a> --}}
                     </div>
-                
                 @endif
             </div>
         </div>
         <p class="comment-description">{{ $comment->comment }}</p>
 
     </div>
+
     <div class="card-footer bg-transparent border-0">
         <div class="row">
             <div class="col-6">
@@ -40,7 +40,8 @@
                     @csrf
                     <input type="hidden" name="comment_id" value="{{ $comment->id }}">
                     <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
-                        @if (count($comment->likes) > 0)
+                        <!-- counting my commment -->
+                        @if ($comment->authLiked)
                             <span class="text-info">Unlike</span>
                         @else
                             <span class="text-info">Like</span>

@@ -20,6 +20,7 @@ class BlogFactory extends Factory
         return [
             'title' => fake()->text(20),
             'content' => fake()->paragraph(),
+            'image' => fake()->imageUrl(),
             'user_id' => fake()->randomElement(User::pluck('id')->toArray()),
         ];
     }

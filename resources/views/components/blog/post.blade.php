@@ -41,11 +41,52 @@
     </div>
 
     <div class="card-body">
-        <div class="text-center">
-            <img src="{{ asset('assets/images/slider/slider2.jpg') }}" class="rounded col-md-6" alt="...">
+        {{-- <div class="row g-3">
+            <div class="">
+                <img src="{{ asset($blogImgUrl) }}" alt="{{ $blogImgAlt }}" class="rounded col-md-6" />
+            </div>
+            <h5 class="card-title">{{ $blog->title }}</h5>
+            <p class="card-text">{{ $blog->content }}</p>
+        </div> --}}
+
+
+        <div class="container-fluid pb-5">
+            <div class="pb-3 col-12">
+                {{-- <img src="{{ asset($blogImgUrl) }}" alt="{{ $blogImgAlt }}" class="rounded col-12 pb-2" />
+                @if ($authId == $blog->user_id && $blogImgUrl == '')
+                    <form>
+                        <x-forms.input type="file" placeholder="Upload Image" name="image" />
+                        <button type="submit" class="btn btn-outline-primary">Change Image</button>
+                    </form>
+                @endif --}}
+
+                @if ($blog->getFirstMediaUrl() !== '')
+                    <img src="{{ $blog->getFirstMediaUrl() }}" class="img-fluid rounded " style="max-height: 25rem;"
+                        alt="{{ $blog->getFirstMedia()->name }}" />
+                @elseif($blog->image !== null)
+                    {{-- {{var_dump($blog->image) }} --}}
+                    <img src="{{ $blog->image }}" class="img-fluid rounded  col-10" alt="Fake Image" />
+                @else
+                    @if ($authId == $blog->user_id)
+                        <form method="POST" action="{{ route('user.blog.update', $blog) }}"
+                            enctype="multipart/form-data">
+                            @method('PUT')
+                            @csrf
+                            <x-forms.input type="hidden" placeholder="Title" value="{{ $blog->title }}"
+                                name="title" />
+                            <x-forms.input type="hidden" value="{{ $blog->content }}" name="content" />
+                            <x-forms.input type="file" placeholder="Upload Image" name="image" />
+                            <button type="submit" class="btn btn-outline-primary">Upload Image</button>
+                        </form>
+                    @endif
+                @endif
+
+            </div>
+            <h1 class="display-6 fw-bold">{{ $blog->title }}</h1>
+            <p class="col-md-8 fs-4">{{ $blog->content }}</p>
         </div>
-        <h5 class="card-title">{{ $blog->title }}</h5>
-        <p class="card-text">{{ $blog->content }}</p>
+
+
     </div>
 
     <div class="card-footer bg-transparent border-0 position-relative bottom-0 end-0">
@@ -53,11 +94,19 @@
             {{-- <a href="{{ route('blog.like', $blog) }}"
                 class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
                     class="badge text-bg-secondary">{{ $blog->likes_count }}</span></a> --}}
+
             <form class="d-inline" method="POST" action="{{ route('user.like.store') }}">
                 @csrf
                 <input type="hidden" name="blog_id" value="{{ $blog->id }}">
-                <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
+                {{-- <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
                     Like <span class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
+                </button> --}}
+
+                <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
+
+                    <span class="text-info">{{ $blog->authLiked ? 'Unlike' : 'Like' }}</span>
+                    <span class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
+                    <!-- check if the blog has likes from auth user -->
                 </button>
             </form>
             <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Comment <span
