@@ -50,11 +50,10 @@ class LikeController extends Controller
      */
     public function store(LikeRequest $request)
     {
-        // dd($request);
+        
         if (isset($request->blog_id)) {
             $this->blogService->like($request->blog_id);
         } elseif (isset($request->comment_id)) {
-            // dd($request->comment_id);
             $this->blogCommentService->like($request->comment_id);
         } else {
             abort(403, 'Technical Error Occured.');

@@ -42,7 +42,7 @@
 
     <div class="card-body">
         <div class="text-center">
-            <img src="{{ asset('assets/images/slider/slider2.jpg') }}" class="rounded col-md-6" alt="...">
+            <img src="{{ asset($blogImgUrl) }}" alt="{{ $blogImgAlt }}" class="rounded col-md-6" />
         </div>
         <h5 class="card-title">{{ $blog->title }}</h5>
         <p class="card-text">{{ $blog->content }}</p>
@@ -53,11 +53,21 @@
             {{-- <a href="{{ route('blog.like', $blog) }}"
                 class="btn btn-sm btn-link text-dark text-decoration-none">Like <span
                     class="badge text-bg-secondary">{{ $blog->likes_count }}</span></a> --}}
+
             <form class="d-inline" method="POST" action="{{ route('user.like.store') }}">
                 @csrf
                 <input type="hidden" name="blog_id" value="{{ $blog->id }}">
-                <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
+                {{-- <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
                     Like <span class="badge text-bg-secondary">{{ $blog->likes_count }}</span>
+                </button> --}}
+
+                <button type="submit" class="btn btn-sm btn-link text-dark text-decoration-none">
+                    @if ($blog->authLiked)
+                        <span class="text-info">Unlike</span>
+                    @else
+                        <span class="text-info">Like</span>
+                    @endif <span
+                        class="badge text-bg-secondary">{{ $blog->likes_count }}</span> <!-- check if the blog has likes from auth user -->
                 </button>
             </form>
             <a href="#" class="btn btn-sm btn-link text-dark text-decoration-none">Comment <span

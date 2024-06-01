@@ -14,8 +14,9 @@ class post extends Component
     public function __construct(
         public object $blog,
         public string $authId = "",
-    )
-    {
+        public string $blogImgUrl,
+        public string $blogImgAlt,
+    ) {
         //
     }
 
