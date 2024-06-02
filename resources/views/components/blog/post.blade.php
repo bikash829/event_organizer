@@ -65,7 +65,7 @@
                         alt="{{ $blog->getFirstMedia()->name }}" />
                 @elseif($blog->image !== null)
                     {{-- {{var_dump($blog->image) }} --}}
-                    <img src="{{ $blog->image }}" class="img-fluid rounded  col-10" alt="Fake Image" />
+                    <img src="{{ $blog->image }}" class="img-fluid rounded"  style="max-height: 25rem;" alt="Fake Image" />
                 @else
                     @if ($authId == $blog->user_id)
                         <form method="POST" action="{{ route('user.blog.update', $blog) }}"

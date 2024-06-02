@@ -46,7 +46,7 @@
                     @foreach ($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
-                            <td>{{ fullName($user->first_name, $user->last_name) }}</td>
+                            <td>{{ fullName($user) }}</td>
                             <td>{{ $user->email }}</td>
 
                             <td> {{ getRole($user->getRoleNames()) }}</td>

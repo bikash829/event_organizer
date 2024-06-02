@@ -66,26 +66,29 @@ Route::resource('contact', ContactController::class)->only(['index', 'store']);
 //________________Route for admin
 //Manager users 
 // prefix 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/user/pending', [AdminController::class, 'pendingVendor'])->name('pendingVendor');
-    Route::get('/user/all-Vendor', [AdminController::class, 'allVendor'])->name('allVendor');
-    Route::get('/user/all-user', [AdminController::class, 'allUser'])->name('allUser');
-    Route::get('/user/all-blocked-user', [AdminController::class, 'blockedUsers'])->name('blockedUsers');
-    Route::get('/user/{user}', [AdminController::class, 'viewUser'])->name('viewUser');
-    Route::get('/user/{user}/block', [AdminController::class, 'blockUser'])->name('blockUser');
-    Route::get('/user/{user}/unblock', [AdminController::class, 'unblockUser'])->name('unblockUser');
-    Route::get('/user/{user}/delete', [AdminController::class, 'deleteUser'])->name('deleteUser');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->group(function () {
+        Route::get('/user/pending', [AdminController::class, 'pendingVendor'])->name('pendingVendor');
+        Route::get('/user/all-Vendor', [AdminController::class, 'allVendor'])->name('allVendor');
+        Route::get('/user/all-user', [AdminController::class, 'allUser'])->name('allUser');
+        Route::get('/user/all-blocked-user', [AdminController::class, 'blockedUsers'])->name('blockedUsers');
+        Route::get('/user/{user}', [AdminController::class, 'viewUser'])->name('viewUser');
+        Route::get('/user/{user}/block', [AdminController::class, 'blockUser'])->name('blockUser');
+        Route::get('/user/{user}/unblock', [AdminController::class, 'unblockUser'])->name('unblockUser');
+        Route::get('/user/{user}/delete', [AdminController::class, 'deleteUser'])->name('deleteUser');
 
 
-    Route::get('/service-category/{category}/disable', [ServiceCategoryController::class, 'disableCategory'])->name('disableCategory');
-    Route::get('/service-category/{category}/enable', [ServiceCategoryController::class, 'enableCategory'])->name('enableCategory');
+        Route::get('/service-category/{category}/disable', [ServiceCategoryController::class, 'disableCategory'])->name('disableCategory');
+        Route::get('/service-category/{category}/enable', [ServiceCategoryController::class, 'enableCategory'])->name('enableCategory');
 
-    Route::resources([
-        'service-category' => ServiceCategoryController::class,
-    ]);
+        Route::resources([
+            'service-category' => ServiceCategoryController::class,
+        ]);
+    });
+
+    Route::resource('admin', AdminController::class);
+
 });
-
-Route::resource('admin', AdminController::class);
 
 
 

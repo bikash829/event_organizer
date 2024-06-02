@@ -26,7 +26,7 @@
             {{-- <p class="text-center"><a href="#" data-bs-toggle="modal" data-bs-target="#user_profile_image">Upload Photo</a></p> --}}
         </div>
         <h3 class="text-muted text-center pt-2">
-            {{ fullName($user->first_name, $user->last_name) }}</h3>
+            {{ fullName($user) }}</h3>
 
 
         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -48,7 +48,7 @@
                             <div class="row g-3">
                                 <div class="col-6">
                                     <label class="text-muted">Full Name: </label>
-                                    <span><strong> {{ fullName($user->first_name, $user->last_name) }}</strong></span>
+                                    <span><strong> {{ fullName($user) }}</strong></span>
                                 </div>
                                 <div class="col-6">
                                     <label class="text-muted">Role: </label>
