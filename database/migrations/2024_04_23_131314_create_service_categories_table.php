@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('category_name', 100);
             $table->enum('status', ['enabled', 'disabled'])->default('enabled');
             $table->text('description');
+            $table->foreignId('parent_id')->nullable()->constrained('service_categories')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

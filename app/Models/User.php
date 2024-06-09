@@ -92,4 +92,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Like::class);
     }
+
+    /**
+     * Has many relationship with Service
+     */
+    public function services(): HasMany
+    {
+        return $this->hasMany(Service::class, 'vendor_id');
+    }
 }

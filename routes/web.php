@@ -5,7 +5,7 @@ use App\Http\Controllers\About\AboutController;
 
 // use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Service\ServiceController; // Service controller 
+
 use App\Http\Controllers\Blog\BlogController; // blog controller
 use App\Http\Controllers\Blog\UserBlogController; // blog controller
 use App\Http\Controllers\Blog\BlogCommentController; // blog comment controller 
@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth; // Auth controller
 use App\Http\Controllers\User\UserController; // User controller 
 
 use App\Http\Controllers\Service\ServiceCategoryController; // controller for service category
+use App\Http\Controllers\Service\ServiceController; // Service controller 
+use App\Http\Controllers\Service\ServiceAdminController; // Service controller 
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -78,12 +80,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/user/{user}/delete', [AdminController::class, 'deleteUser'])->name('deleteUser');
 
 
-        Route::get('/service-category/{category}/disable', [ServiceCategoryController::class, 'disableCategory'])->name('disableCategory');
-        Route::get('/service-category/{category}/enable', [ServiceCategoryController::class, 'enableCategory'])->name('enableCategory');
 
-        Route::resources([
-            'service-category' => ServiceCategoryController::class,
-        ]);
+
+        Route::group(['prefix' => 'services'], function () {
+            Route::get('/service-category/{category}/disable', [ServiceCategoryController::class, 'disableCategory'])->name('disableCategory');
+            Route::get('/service-category/{category}/enable', [ServiceCategoryController::class, 'enableCategory'])->name('enableCategory');
+            Route::resources([
+                'service-category' => ServiceCategoryController::class,
+            ]);
+
+            // services route
+            Route::resource('services', ServiceAdminController::class);
+        });
+
     });
 
     Route::resource('admin', AdminController::class);

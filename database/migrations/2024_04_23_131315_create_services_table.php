@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('service_name', 100);
             $table->text('description');
             $table->enum('is_available', ['yes', 'no'])->default('no');
-            $table->foreignId('vendor_id')->constrained()->onDelete('cascade');
+            $table->foreignId('vendor_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('service_category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

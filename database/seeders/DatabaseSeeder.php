@@ -50,7 +50,12 @@ class DatabaseSeeder extends Seeder
             ['first_name' => 'Test User', 'email' => 'test@example.com', 'role' => 'user'],
             ['first_name' => 'Admin', 'email' => 'admin@example.com', 'password' => Hash::make('password'), 'role' => 'admin'],
             ['first_name' => 'Vendor', 'email' => 'vendor@example.com', 'password' => Hash::make('password'), 'role' => 'vendor'],
+            ['first_name' => 'Vendor1', 'email' => 'vendor1@example.com', 'password' => Hash::make('password'), 'role' => 'vendor'],
+            ['first_name' => 'Vendor2', 'email' => 'vendor2@example.com', 'password' => Hash::make('password'), 'role' => 'vendor'],
+            ['first_name' => 'Vendor3', 'email' => 'vendor3@example.com', 'password' => Hash::make('password'), 'role' => 'vendor'],
             ['first_name' => 'Rayhan', 'email' => 'rayhan@example.com', 'password' => Hash::make('password'), 'role' => 'user'],
+            ['first_name' => 'Faiaz', 'email' => 'faiaz@example.com', 'password' => Hash::make('password'), 'role' => 'user'],
+            ['first_name' => 'Riaz', 'email' => 'riaz@example.com', 'password' => Hash::make('password'), 'role' => 'user'],
         ];
 
         foreach ($users as $user) {
@@ -63,20 +68,20 @@ class DatabaseSeeder extends Seeder
 
 
         // ______________create factory data for ServiceCategoryFactory
-        $serviceCategories = [
-            ['category_name' => 'Music', 'description' => 'Cleaning service'],
-            ['category_name' => 'Decoration', 'description' => 'Plumbing service'],
-            ['category_name' => 'Electrical', 'description' => 'Electrical service'],
-            ['category_name' => 'Stage', 'description' => 'Carpentry service'],
-            ['category_name' => 'Food', 'description' => 'Painting service'],
-            ['category_name' => 'Band', 'description' => 'Gardening service'],
-            ['category_name' => 'Chef', 'description' => 'Pest Control service'],
-        ];
+        // $serviceCategories = [
+        //     ['category_name' => 'Music', 'description' => 'Cleaning service'],
+        //     ['category_name' => 'Decoration', 'description' => 'Plumbing service'],
+        //     ['category_name' => 'Electrical', 'description' => 'Electrical service'],
+        //     ['category_name' => 'Stage', 'description' => 'Carpentry service'],
+        //     ['category_name' => 'Food', 'description' => 'Painting service'],
+        //     ['category_name' => 'Band', 'description' => 'Gardening service'],
+        //     ['category_name' => 'Chef', 'description' => 'Pest Control service'],
+        // ];
 
-        foreach ($serviceCategories as $serviceCategory) {
-            ServiceCategory::create($serviceCategory);
-        }
-
+        // foreach ($serviceCategories as $serviceCategory) {
+        //     ServiceCategory::create($serviceCategory);
+        // }
+        ServiceCategory::factory(10)->create();
 
 
         // ______________create factory data for BlogFactory

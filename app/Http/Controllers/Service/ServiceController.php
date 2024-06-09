@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\ServiceCategory;
+use Illuminate\Console\View\Components\BulletList;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ServiceController extends Controller
 {
@@ -14,7 +17,8 @@ class ServiceController extends Controller
     public function index()
     {
         //
-        return view('services.index');
+        $serviceCategories = ServiceCategory::whereNull('parent_id')->with('subcategories')->get(); // query operated in subcategory model
+        return view('services.index', compact('serviceCategories'));
     }
 
     /**

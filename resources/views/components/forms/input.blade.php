@@ -20,11 +20,20 @@
             id="input_{{ $id }}" name="{{ $name }}" {{ $attributes }} maxlength="{{ $maxLength }}"
             minlength="{{ $minLength }}" placeholder="{{ $placeholder }}"
             @if ($isRequired) required @endif>
+    @elseif ($type == 'select')
+        <select class="form-control @error($errorKey ?? $name) is-invalid @enderror" id="input_{{ $id }}"
+            name="{{ $name }}" {{ $attributes }} @if ($isRequired) required @endif>
+
+            @foreach ($options as $option)
+                <option value="{{ $option['id'] }}" @if (old($name, $value) == $option['id']) selected @endif>
+                    {{ $option['value'] }}
+                </option>
+            @endforeach
+        </select>
     @elseif ($type == 'textarea')
         <textarea class="form-control @error($errorKey ?? $name) is-invalid @enderror" id="input_{{ $id }}"
             name="{{ $name }}" {{ $attributes }} maxlength="{{ $maxLength }}" minlength="{{ $minLength }}"
-            rows="{{ $rows }}"
-            placeholder="{{ $placeholder }}" @if ($isRequired) required @endif>{{ old($name, $value) }}</textarea>
+            rows="{{ $rows }}" placeholder="{{ $placeholder }}" @if ($isRequired) required @endif>{{ old($name, $value) }}</textarea>
     @elseif ($type == 'file')
         <div class="input-group mb-3">
             @if (!$label)

@@ -35,7 +35,7 @@ $navLinks = [
     'MANAGE SERVICES' => [
         'name' => 'Manage Services',
         'icon' => 'fa-solid fa-sliders',
-        'route' => 'admin/service-category',
+        'route' => 'admin/services',
         'children' => [
             [
                 'name' => 'Service Categores',
@@ -50,12 +50,12 @@ $navLinks = [
             [
                 'name' => 'All Services',
                 'icon' => 'fa-solid fa-list',
-                'route' => '',
+                'route' => route('admin.services.index'),
             ],
             [
                 'name' => 'Create Service',
                 'icon' => 'fa-solid fa-file-circle-plus',
-                'route' => '',
+                'route' => route('admin.services.create'),
             ],
         ],
     ],

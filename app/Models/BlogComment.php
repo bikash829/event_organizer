@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo; // BelongsTo added
+use Illuminate\Database\Eloquent\Relations\HasMany; // HasMany added
 use Illuminate\Database\Eloquent\Relations\MorphMany; // MorphMany added
 // use Illuminate\Database\Eloquent\Relations\HasMany; // BelongsTo added
 
@@ -32,12 +33,12 @@ class BlogComment extends Model
         // return $this->hasMany(Like::class, 'likeable_id')->where('likeable_type', Blog::class);
         return $this->morphMany(Like::class, 'likeable');  // with likable column to likes migration table
     }
-    
+
 
     /**
      * Get all of the comment's replies.
      */
-    public function replies()
+    public function replies(): HasMany
     {
         return $this->hasMany(BlogComment::class, 'parent_id');
     }

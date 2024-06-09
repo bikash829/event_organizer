@@ -5,6 +5,7 @@ namespace App\View\Components\forms;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Database\Eloquent\Collection;
 
 class input extends Component
 {
@@ -14,6 +15,7 @@ class input extends Component
     public function __construct(
         public string $colSize = "col-12",
         public string $type = 'text',
+        public array $options = [],
         public string $name = "",
         public string $label = "",
         public string $value = "",
