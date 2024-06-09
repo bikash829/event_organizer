@@ -35,7 +35,7 @@
                         <th>id</th>
                         <th>Category</th>
                         <th>Service</th>
-                        <th>Status</th>
+                        <th>Available</th>
                         {{-- <th>Description</th> --}}
                         <th>Vendor</th>
                         <th>Action</th>
@@ -57,7 +57,46 @@
 
                             </td>
                             <td>{{ $service->vendor->email }}</td>
-                            <td>{{ 'Service' }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary">Action</button>
+                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-icon"
+                                        data-toggle="dropdown">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+
+                                    <div class="dropdown-menu" role="menu">
+
+
+                                        <a class="dropdown-item text-primary"
+                                            href="{{ route('admin.services.show', $service) }}"><i
+                                                class="fa-solid fa-eye"></i> View</a>
+                                        <a class="dropdown-item text-primary" href="{{ route('admin.item.index') }}"><i
+                                                class="fa-solid fa-folder-plus"></i> Items</a>
+
+                                        @if ($service->is_available == 'enabled')
+                                            <a class="dropdown-item text-secondary" data-disable href="# "><i
+                                                    class="fa-solid fa-eye-slash"></i>Disable</a>
+                                        @else
+                                            <a class="dropdown-item text-success" data-enable href="#"><i
+                                                    class="fa-solid fa-eye"></i>
+                                                Enable</a>
+                                        @endif
+                                        <!--<a class="dropdown-item text-danger" href="{{-- route('admin.service-category.destroy', $category) --}}"><i
+                                                                                                                                                                        class="fa-solid fa-eye"></i>Delete</a> -->
+
+                                        <a class="dropdown-item text-primary" href="#"><i
+                                                class="fa-solid fa-pen-to-square"></i>Edit</a>
+                                        <form method="POST" action="#">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button data-delete type="submit" class="dropdown-item text-danger">
+                                                <i class="fa-solid fa-eye"></i> Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
 
                         </tr>
                     @endforeach
@@ -69,7 +108,7 @@
                         <th>id</th>
                         <th>Category</th>
                         <th>Service</th>
-                        <th>Status</th>
+                        <th>Available</th>
                         <th>Vendor</th>
                         <th>Action</th>
                     </tr>
@@ -80,7 +119,6 @@
 
     </div>
     <!-- /.card -->
-
 @endsection
 
 

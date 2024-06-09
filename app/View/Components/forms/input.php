@@ -27,6 +27,8 @@ class input extends Component
         public string|null $id = null,
         public bool $isRequired = false, //boolean
         public string|null $errorKey = null,
+        // public string $attributes = "",
+        public string $attr = "",
     ) {
     }
 

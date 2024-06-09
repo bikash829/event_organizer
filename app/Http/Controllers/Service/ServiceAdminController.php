@@ -67,6 +67,11 @@ class ServiceAdminController extends Controller
     public function show(Service $service)
     {
         //
+        $service->load([
+            'serviceCategory:id,category_name',
+            'vendor:id,first_name,last_name,email',
+        ]);
+        return view('admin.manage_service.service.show', compact('service'));
     }
 
     /**

@@ -17,12 +17,12 @@
     @if (in_array($type, ['text', 'password', 'email', 'number', 'date', 'datetime-local', 'hidden', 'search']))
         <input value="{{ old($name, $value) }}" type="{{ $type }}"
             class="form-control @error($errorKey ?? $name) is-invalid @enderror {{ $class }}"
-            id="input_{{ $id }}" name="{{ $name }}" {{ $attributes }} maxlength="{{ $maxLength }}"
+            id="input_{{ $id }}" name="{{ $name }}" {{ $attr }} maxlength="{{ $maxLength }}"
             minlength="{{ $minLength }}" placeholder="{{ $placeholder }}"
             @if ($isRequired) required @endif>
     @elseif ($type == 'select')
         <select class="form-control @error($errorKey ?? $name) is-invalid @enderror" id="input_{{ $id }}"
-            name="{{ $name }}" {{ $attributes }} @if ($isRequired) required @endif>
+            name="{{ $name }}" {{ $attr }} @if ($isRequired) required @endif>
 
             @foreach ($options as $option)
                 <option value="{{ $option['id'] }}" @if (old($name, $value) == $option['id']) selected @endif>
@@ -32,7 +32,7 @@
         </select>
     @elseif ($type == 'textarea')
         <textarea class="form-control @error($errorKey ?? $name) is-invalid @enderror" id="input_{{ $id }}"
-            name="{{ $name }}" {{ $attributes }} maxlength="{{ $maxLength }}" minlength="{{ $minLength }}"
+            name="{{ $name }}" {{ $attr }} maxlength="{{ $maxLength }}" minlength="{{ $minLength }}"
             rows="{{ $rows }}" placeholder="{{ $placeholder }}" @if ($isRequired) required @endif>{{ old($name, $value) }}</textarea>
     @elseif ($type == 'file')
         <div class="input-group mb-3">
@@ -48,7 +48,7 @@
 
             @endif
             <input type="file" class="form-control @error($errorKey ?? $name) is-invalid @enderror"
-                id="input_{{ $id }}" name="{{ $name }}" {{ $attributes }}
+                id="input_{{ $id }}" name="{{ $name }}" {{ $attr }}
                 @if ($isRequired) required @endif>
 
         </div>

@@ -18,6 +18,7 @@ use App\Http\Controllers\User\UserController; // User controller
 use App\Http\Controllers\Service\ServiceCategoryController; // controller for service category
 use App\Http\Controllers\Service\ServiceController; // Service controller 
 use App\Http\Controllers\Service\ServiceAdminController; // Service controller 
+use App\Http\Controllers\Service\ServiceItem; // Service controller
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -91,6 +92,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
             // services route
             Route::resource('services', ServiceAdminController::class);
+            // Service item
+            Route::resource('item', ServiceItem::class);
+
+
         });
 
     });
