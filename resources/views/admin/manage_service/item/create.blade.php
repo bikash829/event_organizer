@@ -21,16 +21,18 @@
         <!-- /.card-header -->
         <!-- card body -->
         <div class="card-body">
-            <form method="POST" action="{{ route('admin.services.store') }}">
+            <form method="POST" action="{{ route('admin.item.store') }}">
                 @csrf
 
                 <div class="form-group">
-                    <x-forms.input attr="readonly" label="Service" value="value sevice" />
-                    <x-forms.input type="hidden" name="service_id" value="3" :isRequired="true" />
+                    <x-forms.input attr="readonly" label="Service" value="{{ $service->service_name }}" />
+                    <x-forms.input type="hidden" name="service_id" value="{{ $service->id }}" :isRequired="true" />
                 </div>
                 <div class="form-group">
-                    <x-forms.input attr="readonly" label="Category" attribute="readonly" value="value" />
-                    <x-forms.input type="hidden" name="service_category_id" value="2" :isRequired="true" />
+                    <x-forms.input attr="readonly" label="Category" attribute="readonly"
+                        value="{{ $service->serviceCategory->category_name }}" />
+                    <x-forms.input type="hidden" name="service_category_id" value="{{ $service->serviceCategory->id }}"
+                        :isRequired="true" />
                 </div>
 
                 <div class="form-group">

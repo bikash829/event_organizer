@@ -29,4 +29,9 @@ class Service extends Model
     {
         return $this->belongsTo(User::class, 'vendor_id');
     }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }
